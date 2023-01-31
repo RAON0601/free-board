@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
-export const NewBoardForm = styled.div`
+export const NewBoardForm = styled.form`
   box-sizing: border-box;
-  width: 90vw;
-  min-width: 800px;
+  width: 50vw;
+  min-width: 700px;
   margin: 0 auto;
   padding: 0 32px 32px 32px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -42,7 +42,7 @@ export const InputFieldMid = styled.div`
 `;
 
 export const InputFieldSmall = styled.div`
-  width: 10%;
+  width: 30%;
 `;
 
 export const Label = styled.label`
@@ -58,6 +58,12 @@ export const Input = styled.input`
   padding-left: 16px;
 `;
 
+export const InputError = styled.p`
+  color: red;
+  margin-top: 4px;
+  padding-left: 4px;
+`;
+
 export const TextArea = styled.textarea`
   display: block;
   width: 100%;
@@ -69,6 +75,8 @@ export const ButtonBlack = styled.button`
   background-color: black;
   color: white;
   padding: 4px 8px;
+  height: 52px;
+  cursor: pointer;
 `;
 
 export const ButtonYellow = styled.button`
@@ -77,6 +85,7 @@ export const ButtonYellow = styled.button`
   font-weight: 600;
   padding: 14px 60px;
   border: none;
+  cursor: pointer;
 `;
 
 export const GrayBox = styled.div`
