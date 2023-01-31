@@ -14,112 +14,42 @@ import {
   ButtonYellow,
   InputError,
 } from "@/styles/boards/new";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function NewBoardFormPage() {
-  const [author, setAuthor] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [address3, setAddress3] = useState("");
-  const [youtubeLink, setYoutubeLink] = useState("");
-  const [category, setCategory] = useState("사진");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [authorError, setAuthorError] = useState("");
-  const [pwdError, setPwdError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [address1Error, setAddress1Error] = useState("");
-  const [address2Error, setAddress2Error] = useState("");
-  const [address3Error, setAddress3Error] = useState("");
-  const [youtubeLinkError, setYoutubeLinkError] = useState("");
-
-  const onAuthorChange = (e) => setAuthor(e.target.value);
-  const onPwdChange = (e) => setPwd(e.target.value);
-  const onTitleChange = (e) => setTitle(e.target.value);
-  const onContentChange = (e) => setContent(e.target.value);
-  const onAddress1Change = (e) => setAddress1(e.target.value);
-  const onAddress2Change = (e) => setAddress2(e.target.value);
-  const onAddress3Change = (e) => setAddress3(e.target.value);
-  const onYoutubeLinkChange = (e) => setYoutubeLink(e.target.value);
-  const onCategoryChange = (e) => setCategory(e.target.value);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    if (author.length <= 0) {
-      setAuthorError("작성자는 비어 있을 수 없습니다.");
-    } else {
-      setAuthorError("");
-    }
-
-    if (pwd.length <= 0) {
-      setPwdError("비밀번호는 비어 있을 수 없습니다.");
-    } else {
-      setPwdError("");
-    }
-
-    if (title.length <= 0) {
-      setTitleError("제목은 비어 있을 수 없습니다.");
-    } else {
-      setTitleError("");
-    }
-
-    if (content.length <= 0) {
-      setContentError("내용은 비어 있을 수 없습니다.");
-    } else {
-      setContentError("");
-    }
-
-    if (address1.length <= 0) {
-      setAddress1Error("주소는 비어 있을 수 없습니다.");
-    } else {
-      setAddress1Error("");
-    }
-
-    if (address2.length <= 0) {
-      setAddress2Error("주소는 비어 있을 수 없습니다.");
-    } else {
-      setAddress2Error("");
-    }
-
-    if (address3.length <= 0) {
-      setAddress3Error("주소는 비어 있을 수 없습니다.");
-    } else {
-      setAddress3Error("");
-    }
-
-    if (youtubeLink.length <= 0) {
-      setYoutubeLinkError("링크는 비어 있을 수 없습니다.");
-    } else {
-      setYoutubeLinkError("");
-    }
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
-    <NewBoardForm onSubmit={onSubmit}>
+    <NewBoardForm onSubmit={handleSubmit(onSubmit)}>
       <FormName>게시글 등록</FormName>
       <Row>
         <InputFieldMid>
           <Label>작성자</Label>
           <Input
             placeholder="이름을 적어주세요"
-            onChange={onAuthorChange}
-            value={author}
+            aria-invalid={errors.author ? "true" : "false"}
+            {...register("author", {
+              required: "작성자는 필수 입력값 입니다.",
+            })}
           />
-          {authorError && <InputError>{authorError}</InputError>}
+          {errors.author && <InputError>{errors.author.message}</InputError>}
         </InputFieldMid>
 
         <InputFieldMid>
           <Label>비밀번호</Label>
           <Input
             placeholder="비밀번호를 입력해주세요"
-            onChange={onPwdChange}
-            value={pwd}
+            {...register("pwd", { required: "비밀번호는 필수 입력값 입니다." })}
           />
-          {pwdError && <InputError>{pwdError}</InputError>}
+          {errors.pwd && <InputError>{errors.pwd.message}</InputError>}
         </InputFieldMid>
       </Row>
 
@@ -128,18 +58,19 @@ export default function NewBoardFormPage() {
           <Label>제목</Label>
           <Input
             placeholder="제목을 작성해주세요"
-            onChange={onTitleChange}
-            value={title}
+            {...register("title", { required: "제목은 필수 입력값 입니다." })}
           />
-          {titleError && <InputError>{titleError}</InputError>}
+          {errors.title && <InputError>{errors.title.message}</InputError>}
         </InputField>
       </Row>
 
       <Row>
         <InputField>
           <Label>내용</Label>
-          <TextArea onChange={onContentChange} value={content} />
-          {contentError && <InputError>{contentError}</InputError>}
+          <TextArea
+            {...register("content", { required: "내용은 필수 입력값 입니다." })}
+          />
+          {errors.content && <InputError>{errors.content.message}</InputError>}
         </InputField>
       </Row>
 
@@ -151,25 +82,40 @@ export default function NewBoardFormPage() {
         <InputFieldSmall style={{ marginRight: "16px" }}>
           <Input
             placeholder="07250"
-            onChange={onAddress1Change}
-            value={address1}
+            {...register("address1", {
+              required: "주소는 필수 입력값 입니다.",
+            })}
           />
-          {address1Error && <InputError>{address1Error}</InputError>}
+          {errors.address1 && (
+            <InputError>{errors.address1.message}</InputError>
+          )}
         </InputFieldSmall>
         <ButtonBlack>우편번호 검색</ButtonBlack>
       </Row>
 
       <Row>
         <InputField>
-          <Input onChange={onAddress2Change} value={address2} />
-          {address2Error && <InputError>{address2Error}</InputError>}
+          <Input
+            {...register("address2", {
+              required: "주소는 필수 입력값 입니다.",
+            })}
+          />
+          {errors.address2 && (
+            <InputError>{errors.address2.message}</InputError>
+          )}
         </InputField>
       </Row>
 
       <Row>
         <InputField>
-          <Input onChange={onAddress3Change} value={address3} />
-          {address3Error && <InputError>{address3Error}</InputError>}
+          <Input
+            {...register("address3", {
+              required: "주소는 필수 입력값 입니다.",
+            })}
+          />
+          {errors.address3 && (
+            <InputError>{errors.address3.message}</InputError>
+          )}
         </InputField>
       </Row>
 
@@ -178,10 +124,13 @@ export default function NewBoardFormPage() {
           <Label>유튜브</Label>
           <Input
             placeholder="링크를 복사해주세요"
-            onChange={onYoutubeLinkChange}
-            value={youtubeLink}
+            {...register("youtubeLink", {
+              required: "유튜브 링크는 필수 입력값 입니다.",
+            })}
           />
-          {youtubeLinkError && <InputError>{youtubeLinkError}</InputError>}
+          {errors.youtubeLink && (
+            <InputError>{errors.youtubeLink.message}</InputError>
+          )}
         </InputField>
       </Row>
 
@@ -200,14 +149,17 @@ export default function NewBoardFormPage() {
       </Row>
 
       <Row style={{ justifyContent: "flex-start", alignItems: "center" }}>
-        <Radio type="radio" name="category" value="유튜브" />
+        <Radio
+          type="radio"
+          name="category"
+          value="유튜브"
+          {...register("categorty", { required: "종류는 필수 입력값 입니다!" })}
+        />
         <Label style={{ marginBottom: 0, marginRight: "16px" }}>유튜브</Label>
         <Radio
           type="radio"
           name="category"
-          onClick={(e) => console.log(e.target.value)}
-          value="사진"
-          defaultChecked
+          {...register("categorty", { required: "종류는 필수 입력값 입니다!" })}
         />
         <Label style={{ marginBottom: 0 }}>사진</Label>
       </Row>
