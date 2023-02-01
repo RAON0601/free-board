@@ -14,7 +14,7 @@ export default function BoardWrite({ routeBoardDetail }) {
   } = useForm();
 
   const validateInput = () => {
-    const boardInput = watch();
+    const boardInput = watch(["writer", "password", "title", "contents"]);
     const { writer, password, title, contents } = boardInput;
     return writer && password && title && contents ? true : false;
   };

@@ -8,5 +8,5 @@ export default function BoardWritePage() {
     router.push(`/boards/detail/${boardId}`);
   };
 
-  return <BoardWrite {...{ routeDetail }} />;
+  return <BoardWrite {...{ routeBoardDetail }} />;
 }
