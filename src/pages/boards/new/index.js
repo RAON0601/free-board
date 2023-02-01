@@ -14,7 +14,31 @@ import {
   ButtonYellow,
   InputError,
 } from "@/styles/boards/new";
+import { useMutation, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
+
+const CREATE_BOARD = gql`
+  mutation createBoard(
+    $writer: String
+    $title: String!
+    $contents: String!
+    $password: String!
+  ) {
+    createBoard(
+      createBoardInput: {
+        writer: $writer
+        title: $title
+        contents: $contents
+        password: $password
+      }
+    ) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
 
 export default function NewBoardFormPage() {
   const {
@@ -23,8 +47,20 @@ export default function NewBoardFormPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [createBoardAPI] = useMutation(CREATE_BOARD);
+
+  const onSubmit = async (data) => {
+    const { writer, password, title, contents } = data;
+    const res = await createBoardAPI({
+      variables: {
+        writer,
+        password,
+        title,
+        contents,
+      },
+    });
+    console.log(res);
+    alert("게시글 등록이 완료 되었습니다!");
   };
 
   return (
@@ -36,20 +72,24 @@ export default function NewBoardFormPage() {
           <Input
             placeholder="이름을 적어주세요"
             aria-invalid={errors.author ? "true" : "false"}
-            {...register("author", {
+            {...register("writer", {
               required: "작성자는 필수 입력값 입니다.",
             })}
           />
-          {errors.author && <InputError>{errors.author.message}</InputError>}
+          {errors.writer && <InputError>{errors.writer.message}</InputError>}
         </InputFieldMid>
 
         <InputFieldMid>
           <Label>비밀번호</Label>
           <Input
             placeholder="비밀번호를 입력해주세요"
-            {...register("pwd", { required: "비밀번호는 필수 입력값 입니다." })}
+            {...register("password", {
+              required: "비밀번호는 필수 입력값 입니다.",
+            })}
           />
-          {errors.pwd && <InputError>{errors.pwd.message}</InputError>}
+          {errors.password && (
+            <InputError>{errors.password.message}</InputError>
+          )}
         </InputFieldMid>
       </Row>
 
@@ -68,9 +108,13 @@ export default function NewBoardFormPage() {
         <InputField>
           <Label>내용</Label>
           <TextArea
-            {...register("content", { required: "내용은 필수 입력값 입니다." })}
+            {...register("contents", {
+              required: "내용은 필수 입력값 입니다.",
+            })}
           />
-          {errors.content && <InputError>{errors.content.message}</InputError>}
+          {errors.contents && (
+            <InputError>{errors.contents.message}</InputError>
+          )}
         </InputField>
       </Row>
 
@@ -80,12 +124,7 @@ export default function NewBoardFormPage() {
 
       <Row style={{ justifyContent: "start", alignItems: "center" }}>
         <InputFieldSmall style={{ marginRight: "16px" }}>
-          <Input
-            placeholder="07250"
-            {...register("address1", {
-              required: "주소는 필수 입력값 입니다.",
-            })}
-          />
+          <Input placeholder="07250" {...register("address1")} />
           {errors.address1 && (
             <InputError>{errors.address1.message}</InputError>
           )}
@@ -95,11 +134,7 @@ export default function NewBoardFormPage() {
 
       <Row>
         <InputField>
-          <Input
-            {...register("address2", {
-              required: "주소는 필수 입력값 입니다.",
-            })}
-          />
+          <Input {...register("address2")} />
           {errors.address2 && (
             <InputError>{errors.address2.message}</InputError>
           )}
@@ -108,11 +143,7 @@ export default function NewBoardFormPage() {
 
       <Row>
         <InputField>
-          <Input
-            {...register("address3", {
-              required: "주소는 필수 입력값 입니다.",
-            })}
-          />
+          <Input {...register("address3")} />
           {errors.address3 && (
             <InputError>{errors.address3.message}</InputError>
           )}
@@ -124,9 +155,7 @@ export default function NewBoardFormPage() {
           <Label>유튜브</Label>
           <Input
             placeholder="링크를 복사해주세요"
-            {...register("youtubeLink", {
-              required: "유튜브 링크는 필수 입력값 입니다.",
-            })}
+            {...register("youtubeLink")}
           />
           {errors.youtubeLink && (
             <InputError>{errors.youtubeLink.message}</InputError>
@@ -153,14 +182,10 @@ export default function NewBoardFormPage() {
           type="radio"
           name="category"
           value="유튜브"
-          {...register("categorty", { required: "종류는 필수 입력값 입니다!" })}
+          {...register("categorty")}
         />
         <Label style={{ marginBottom: 0, marginRight: "16px" }}>유튜브</Label>
-        <Radio
-          type="radio"
-          name="category"
-          {...register("categorty", { required: "종류는 필수 입력값 입니다!" })}
-        />
+        <Radio type="radio" name="category" {...register("categorty")} />
         <Label style={{ marginBottom: 0 }}>사진</Label>
       </Row>
 
