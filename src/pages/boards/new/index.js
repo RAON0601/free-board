@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 
 export default function BoardWritePage() {
   const router = useRouter();
-  const routeDetail = (boardId) => {
+
+  const routeBoardDetail = (boardId) => {
     router.push(`/boards/detail/${boardId}`);
   };
 

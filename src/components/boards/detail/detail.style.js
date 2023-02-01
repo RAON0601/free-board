@@ -117,3 +117,21 @@ export const RecommendText = styled.span`
   font-size: 18px;
   color: #828282;
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 60px;
+`;
+
+export const Button = styled.button`
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #bdbdbd;
+  padding: 14px 60px;
+  margin-right: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+`;

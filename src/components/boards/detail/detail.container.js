@@ -1,13 +1,30 @@
 import BoardDetailUI from "./detail.presenter";
-import { useQuery } from "@apollo/client";
-import { FETCH_BOARD } from "./detail.queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_BOARD, FETCH_BOARD } from "./detail.queries";
 
-export default function BoardDetail({ id }) {
+export default function BoardDetail({ id, routeBoardList }) {
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: id,
     },
   });
 
-  return <BoardDetailUI {...data?.fetchBoard} />;
+  const [deleteBoardAPI] = useMutation(DELETE_BOARD);
+
+  const deleteBoard = async (_id) => {
+    try {
+      if (confirm("게시글을 삭제 하시겠습니까?")) {
+        await deleteBoardAPI({
+          variables: {
+            boardId: _id,
+          },
+        });
+        routeBoardList();
+      }
+    } catch (error) {
+      alert("게시글 삭제중 에러가 발생했습니다!");
+    }
+  };
+
+  return <BoardDetailUI {...{ ...data?.fetchBoard, deleteBoard }} />;
 }

@@ -3,7 +3,7 @@ import { CREATE_BOARD } from "./write.queries";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 
-export default function BoardWrite({ routeDetail }) {
+export default function BoardWrite({ routeBoardDetail }) {
   const [createBoardAPI] = useMutation(CREATE_BOARD);
 
   const {
@@ -33,7 +33,7 @@ export default function BoardWrite({ routeDetail }) {
 
       const createdId = res.data.createBoard._id;
       alert("게시글 등록이 완료 되었습니다!");
-      routeDetail(createdId);
+      routeBoardDetail(createdId);
     } catch (error) {
       alert(error.message);
     }
