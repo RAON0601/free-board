@@ -15,6 +15,7 @@ import {
   InputError,
 } from "@/styles/boards/new";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 const CREATE_BOARD = gql`
@@ -47,20 +48,28 @@ export default function NewBoardFormPage() {
     formState: { errors },
   } = useForm();
 
+  const router = useRouter();
+
   const [createBoardAPI] = useMutation(CREATE_BOARD);
 
   const onSubmit = async (data) => {
-    const { writer, password, title, contents } = data;
-    const res = await createBoardAPI({
-      variables: {
-        writer,
-        password,
-        title,
-        contents,
-      },
-    });
-    console.log(res);
-    alert("게시글 등록이 완료 되었습니다!");
+    try {
+      const { writer, password, title, contents } = data;
+      const res = await createBoardAPI({
+        variables: {
+          writer,
+          password,
+          title,
+          contents,
+        },
+      });
+
+      const createdId = res.data.createBoard._id;
+      alert("게시글 등록이 완료 되었습니다!");
+      router.push(`/boards/detail/${createdId}`);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

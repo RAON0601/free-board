@@ -68,6 +68,8 @@ export const TextArea = styled.textarea`
   display: block;
   width: 100%;
   height: 480px;
+  padding-top: 10px;
+  padding-left: 10px;
   border: 1px solid #bdbdbd;
 `;
 
