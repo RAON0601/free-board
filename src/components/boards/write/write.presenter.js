@@ -9,20 +9,21 @@ import {
   Label,
   Radio,
 } from "@/components/commons/form/input.style";
-import { ButtonBlack, ButtonYellow } from "@/components/commons/button.style";
+import {
+  ButtonBlack,
+  CreateBoardButton,
+} from "@/components/commons/button.style";
 import { GrayBox } from "@/components/boards/write/write.style";
 import { Row } from "@/components/commons/row.style";
-import { useForm } from "react-hook-form";
 
-export default function BoardWriteUI({ onSubmit }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+export default function BoardWriteUI({
+  onSubmit,
+  register,
+  errors,
+  validateInput,
+}) {
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={onSubmit}>
       <FormName>게시글 등록</FormName>
       <Row style={{ justifyContent: "space-between" }}>
         <InputFieldMid>
@@ -147,7 +148,12 @@ export default function BoardWriteUI({ onSubmit }) {
       </Row>
 
       <Row style={{ justifyContent: "center", marginTop: "48px" }}>
-        <ButtonYellow type="submit">등록하기</ButtonYellow>
+        <CreateBoardButton
+          type="submit"
+          backgroundColor={validateInput() ? "#ffd600" : "gray"}
+        >
+          등록하기
+        </CreateBoardButton>
       </Row>
     </Form>
   );

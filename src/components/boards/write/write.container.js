@@ -1,11 +1,25 @@
 import BoardWriteUI from "./write.presenter";
 import { CREATE_BOARD } from "./write.queries";
 import { useMutation } from "@apollo/client";
+import { useForm } from "react-hook-form";
 
 export default function BoardWrite({ routeDetail }) {
   const [createBoardAPI] = useMutation(CREATE_BOARD);
 
-  const onSubmit = async (data) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const validateInput = () => {
+    const boardInput = watch();
+    const { writer, password, title, contents } = boardInput;
+    return writer && password && title && contents ? true : false;
+  };
+
+  const onSubmit = handleSubmit(async (data) => {
     try {
       const { writer, password, title, contents } = data;
       const res = await createBoardAPI({
@@ -23,7 +37,7 @@ export default function BoardWrite({ routeDetail }) {
     } catch (error) {
       alert(error.message);
     }
-  };
+  });
 
-  return <BoardWriteUI {...{ onSubmit }} />;
+  return <BoardWriteUI {...{ onSubmit, register, errors, validateInput }} />;
 }
