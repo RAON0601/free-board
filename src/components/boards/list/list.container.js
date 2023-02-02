@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { FETCH_BOARDS } from "../board.queries";
 import BoardListUI from "./list.presenter";
-import { FETCH_BOARDS } from "./list.queries";
 
 export default function BoardList({ routingDetail }) {
   const { data } = useQuery(FETCH_BOARDS);

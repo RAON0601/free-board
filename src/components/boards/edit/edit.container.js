@@ -2,12 +2,12 @@ import BoardEditUI from "./edit.presenter";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { UPDATE_BOARD } from "./edit.queries";
 import { makeObjectFrom, validateObjectValue } from "@/utils";
-import { FETCH_BOARD } from "../detail/detail.queries";
+import { FETCH_BOARD, UPDATE_BOARD } from "../board.queries";
 
-export default function BoardEdit({ id, routeBoardDetail, board }) {
+export default function BoardEdit({ id, routeBoardDetail }) {
   const [updateBoardAPI] = useMutation(UPDATE_BOARD);
+
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: id,
@@ -15,12 +15,14 @@ export default function BoardEdit({ id, routeBoardDetail, board }) {
   });
 
   const [isEdit, setEdit] = useState(false);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
   const validateFieldNames = ["title", "contents", "password"];
   const validateFields = watch(validateFieldNames);
 

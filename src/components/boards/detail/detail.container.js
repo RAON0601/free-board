@@ -1,15 +1,15 @@
 import BoardDetailUI from "./detail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_BOARD, FETCH_BOARD } from "./detail.queries";
+import { DELETE_BOARD, FETCH_BOARD } from "../board.queries";
 
 export default function BoardDetail({ id, routeBoardList, routeBoardEdit }) {
+  const [deleteBoardAPI] = useMutation(DELETE_BOARD);
+
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: id,
     },
   });
-
-  const [deleteBoardAPI] = useMutation(DELETE_BOARD);
 
   const deleteBoard = async (_id) => {
     try {

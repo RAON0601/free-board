@@ -1,19 +1,22 @@
 import BoardWriteUI from "./write.presenter";
-import { CREATE_BOARD } from "./write.queries";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { makeObjectFrom, validateObjectValue } from "@/utils";
+import { CREATE_BOARD } from "../board.queries";
 
 export default function BoardWrite({ routeBoardDetail }) {
   const [createBoardAPI] = useMutation(CREATE_BOARD);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
   const validateFieldNames = ["writer", "password", "title", "contents"];
   const validateFields = watch(validateFieldNames);
+
   const validateInput = () =>
     validateObjectValue(makeObjectFrom(validateFieldNames, validateFields));
 
