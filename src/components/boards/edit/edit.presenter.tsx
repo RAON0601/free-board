@@ -1,4 +1,5 @@
 import BoardForm from "../form/boardForm";
+import { BoardEditUIProps } from "./edit.types";
 
 export default function BoardEditUI({
   onSubmit,
@@ -7,7 +8,7 @@ export default function BoardEditUI({
   validateInput,
   isEdit,
   board,
-}) {
+}: BoardEditUIProps) {
   return (
     <BoardForm
       {...{ onSubmit, register, errors, validateInput, isEdit, board }}

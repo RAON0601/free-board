@@ -15,6 +15,7 @@ import {
 } from "@/components/commons/button.style";
 import { GrayBox } from "@/components/boards/write/write.style";
 import { Row } from "@/components/commons/row.style";
+import { BoardFormProps } from "./boardForm.types";
 
 export default function BoardForm({
   onSubmit,
@@ -23,7 +24,7 @@ export default function BoardForm({
   validateInput,
   isEdit,
   board,
-}) {
+}: BoardFormProps) {
   return (
     <Form onSubmit={onSubmit}>
       <FormName>게시글 {isEdit ? "수정" : "등록"}</FormName>
@@ -37,7 +38,9 @@ export default function BoardForm({
             })}
             defaultValue={board?.writer}
           />
-          {errors.writer && <InputError>{errors.writer.message}</InputError>}
+          {errors.writer && (
+            <InputError>{`${errors.writer.message}`}</InputError>
+          )}
         </InputFieldMid>
 
         <InputFieldMid>
@@ -49,7 +52,7 @@ export default function BoardForm({
             })}
           />
           {errors.password && (
-            <InputError>{errors.password.message}</InputError>
+            <InputError>{`${errors.password.message}`}</InputError>
           )}
         </InputFieldMid>
       </Row>
@@ -62,7 +65,7 @@ export default function BoardForm({
             {...register("title", { required: "제목은 필수 입력값 입니다." })}
             defaultValue={board?.title}
           />
-          {errors.title && <InputError>{errors.title.message}</InputError>}
+          {errors.title && <InputError>{`${errors.title.message}`}</InputError>}
         </InputField>
       </Row>
 
@@ -76,7 +79,7 @@ export default function BoardForm({
             defaultValue={board?.contents}
           />
           {errors.contents && (
-            <InputError>{errors.contents.message}</InputError>
+            <InputError>{`${errors.contents.message}`}</InputError>
           )}
         </InputField>
       </Row>
@@ -89,7 +92,7 @@ export default function BoardForm({
         <InputFieldSmall style={{ marginRight: "16px" }}>
           <Input placeholder="07250" {...register("address1")} />
           {errors.address1 && (
-            <InputError>{errors.address1.message}</InputError>
+            <InputError>{`${errors.address1.message}`}</InputError>
           )}
         </InputFieldSmall>
         <ButtonBlack>우편번호 검색</ButtonBlack>
@@ -99,7 +102,7 @@ export default function BoardForm({
         <InputField>
           <Input {...register("address2")} />
           {errors.address2 && (
-            <InputError>{errors.address2.message}</InputError>
+            <InputError>{`${errors.address2.message}`}</InputError>
           )}
         </InputField>
       </Row>
@@ -108,7 +111,7 @@ export default function BoardForm({
         <InputField>
           <Input {...register("address3")} />
           {errors.address3 && (
-            <InputError>{errors.address3.message}</InputError>
+            <InputError>{`${errors.address3.message}`}</InputError>
           )}
         </InputField>
       </Row>
@@ -121,7 +124,7 @@ export default function BoardForm({
             {...register("youtubeLink")}
           />
           {errors.youtubeLink && (
-            <InputError>{errors.youtubeLink.message}</InputError>
+            <InputError>{`${errors.youtubeLink.message}`}</InputError>
           )}
         </InputField>
       </Row>
@@ -141,14 +144,9 @@ export default function BoardForm({
       </Row>
 
       <Row style={{ justifyContent: "flex-start", alignItems: "center" }}>
-        <Radio
-          type="radio"
-          name="category"
-          value="유튜브"
-          {...register("category")}
-        />
+        <Radio type="radio" value="유튜브" {...register("category")} />
         <Label style={{ marginBottom: 0, marginRight: "16px" }}>유튜브</Label>
-        <Radio type="radio" name="category" {...register("category")} />
+        <Radio type="radio" {...register("category")} />
         <Label style={{ marginBottom: 0 }}>사진</Label>
       </Row>
 

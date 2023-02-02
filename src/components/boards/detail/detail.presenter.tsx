@@ -20,6 +20,7 @@ import {
   ButtonWrapper,
   Button,
 } from "./detail.style";
+import { BoardDetailUIProps } from "./detail.type";
 
 export default function BoardDetailUI({
   _id,
@@ -32,7 +33,7 @@ export default function BoardDetailUI({
   deleteBoard,
   routeBoardList,
   routeBoardEdit,
-}) {
+}: BoardDetailUIProps) {
   return (
     <>
       <BoardDetail>
@@ -41,9 +42,7 @@ export default function BoardDetailUI({
             <WriterProfile src="/profile.png" />
             <WriterDetail>
               <Writer>{writer || "김정민"}</Writer>
-              <CreateBoardDate>
-                Date: {createdAt || "2023.02.01"}
-              </CreateBoardDate>
+              <CreateBoardDate>{`Date: ${createdAt ?? ""}`}</CreateBoardDate>
             </WriterDetail>
           </WriterInfoWrapper>
 

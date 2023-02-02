@@ -12,8 +12,12 @@ import {
   Tr,
   Title,
 } from "./list.style";
+import { BoardListUIProps } from "./list.type";
 
-export default function BoardListUI({ boardList, routingDetail }) {
+export default function BoardListUI({
+  boardList,
+  routingDetail,
+}: BoardListUIProps) {
   return (
     <BoardListContainer>
       <SearchSection>
@@ -38,7 +42,7 @@ export default function BoardListUI({ boardList, routingDetail }) {
               <Td>{_id}</Td>
               <Title onClick={() => routingDetail(_id)}>{title}</Title>
               <Td>{writer}</Td>
-              <Td>{createdAt}</Td>
+              <Td>{createdAt.toDateString()}</Td>
             </Tr>
           ))}
         </Tbody>

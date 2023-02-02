@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function BoardWritePage() {
   const router = useRouter();
 
-  const routeBoardDetail = (id) => {
+  const routeBoardDetail = (id: string) => {
     router.push(`/boards/${id}/detail`);
   };
 

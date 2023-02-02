@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { makeObjectFrom, validateObjectValue } from "@/utils";
 import { FETCH_BOARD, UPDATE_BOARD } from "../board.queries";
+import { BoardEditProps, updateBoardRequest } from "./edit.types";
 
-export default function BoardEdit({ id, routeBoardDetail }) {
+export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
   const [updateBoardAPI] = useMutation(UPDATE_BOARD);
 
   const { data } = useQuery(FETCH_BOARD, {
@@ -35,11 +36,11 @@ export default function BoardEdit({ id, routeBoardDetail }) {
 
   const validateInput = () =>
     validateObjectValue(makeObjectFrom(validateFieldNames, validateFields));
-    
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       const { password, title, contents } = data;
-      const myVariables = { boardId: id };
+      const myVariables: updateBoardRequest = { boardId: id };
       if (password) myVariables.password = password;
       if (title) myVariables.title = title;
       if (contents) myVariables.contents = contents;
@@ -52,7 +53,7 @@ export default function BoardEdit({ id, routeBoardDetail }) {
       alert("게시글 수정이 완료 되었습니다!");
       routeBoardDetail(updateId);
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   });
 

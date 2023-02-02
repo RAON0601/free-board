@@ -1,8 +1,13 @@
 import BoardDetailUI from "./detail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARD } from "../board.queries";
+import { BoardDetailProps } from "./detail.type";
 
-export default function BoardDetail({ id, routeBoardList, routeBoardEdit }) {
+export default function BoardDetail({
+  id,
+  routeBoardList,
+  routeBoardEdit,
+}: BoardDetailProps) {
   const [deleteBoardAPI] = useMutation(DELETE_BOARD);
 
   const { data } = useQuery(FETCH_BOARD, {
@@ -11,7 +16,7 @@ export default function BoardDetail({ id, routeBoardList, routeBoardEdit }) {
     },
   });
 
-  const deleteBoard = async (_id) => {
+  const deleteBoard = async (_id: string) => {
     try {
       if (confirm("게시글을 삭제 하시겠습니까?")) {
         await deleteBoardAPI({

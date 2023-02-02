@@ -1,9 +1,10 @@
-import BoardList from "@/components/boards/list/list.container";
+import React from "react";
+import BoardList from "../../components/boards/list/list.container";
 import { useRouter } from "next/router";
 
 export default function BoardListPage() {
   const router = useRouter();
-  const routingDetail = (id) => {
+  const routingDetail = (id: string) => {
     router.push(`/boards/${id}/detail`);
   };
 

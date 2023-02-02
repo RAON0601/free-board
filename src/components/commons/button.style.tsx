@@ -17,7 +17,7 @@ export const ButtonYellow = styled.button`
   cursor: pointer;
 `;
 
-export const CreateBoardButton = styled.button`
+export const CreateBoardButton = styled.button<{ backgroundColor?: string }>`
   background-color: ${({ backgroundColor }) => backgroundColor ?? "white"};
   color: ${({ color }) => color ?? "black"};
   font-size: 16px;
