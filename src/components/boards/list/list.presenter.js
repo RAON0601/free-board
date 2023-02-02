@@ -1,4 +1,3 @@
-import { Input } from "@/components/commons/form/input.style";
 import {
   BoardListContainer,
   DateInput,
@@ -13,7 +12,7 @@ import {
   Tr,
 } from "./list.style";
 
-export default function BoardListUI() {
+export default function BoardListUI({ boardList }) {
   return (
     <BoardListContainer>
       <SearchSection>
