@@ -23,10 +23,12 @@ export default function BoardListUI({ boardList }) {
 
       <Table>
         <Thead>
-          <Th>번호</Th>
-          <Th>제목</Th>
-          <Th>작성자</Th>
-          <Th>날짜</Th>
+          <Tr>
+            <Th>번호</Th>
+            <Th>제목</Th>
+            <Th>작성자</Th>
+            <Th>날짜</Th>
+          </Tr>
         </Thead>
         <Tbody>
           <Tr>
