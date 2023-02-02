@@ -22,6 +22,7 @@ export default function BoardForm({
   errors,
   validateInput,
   isEdit,
+  board,
 }) {
   validateInput();
 
@@ -36,6 +37,7 @@ export default function BoardForm({
             {...register("writer", {
               required: "작성자는 필수 입력값 입니다.",
             })}
+            defaultValue={board?.writer}
           />
           {errors.writer && <InputError>{errors.writer.message}</InputError>}
         </InputFieldMid>
@@ -60,6 +62,7 @@ export default function BoardForm({
           <Input
             placeholder="제목을 작성해주세요"
             {...register("title", { required: "제목은 필수 입력값 입니다." })}
+            defaultValue={board?.title}
           />
           {errors.title && <InputError>{errors.title.message}</InputError>}
         </InputField>
@@ -72,6 +75,7 @@ export default function BoardForm({
             {...register("contents", {
               required: "내용은 필수 입력값 입니다.",
             })}
+            defaultValue={board?.contents}
           />
           {errors.contents && (
             <InputError>{errors.contents.message}</InputError>
