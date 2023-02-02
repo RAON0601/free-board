@@ -12,7 +12,14 @@ export default function BoardWrite({ routeBoardDetail }) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      writer: "",
+      password: "",
+      title: "",
+      contents: "",
+    },
+  });
 
   const validateFieldNames = ["writer", "password", "title", "contents"];
   const validateFields = watch(validateFieldNames);

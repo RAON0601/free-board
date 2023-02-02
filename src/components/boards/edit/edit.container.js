@@ -21,24 +21,31 @@ export default function BoardEdit({ id, routeBoardDetail }) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "",
+      contents: "",
+      password: "",
+    },
+    values: data?.fetchBoard,
+  });
 
   const validateFieldNames = ["title", "contents", "password"];
   const validateFields = watch(validateFieldNames);
 
   const validateInput = () =>
     validateObjectValue(makeObjectFrom(validateFieldNames, validateFields));
-
+    
   const onSubmit = handleSubmit(async (data) => {
     try {
       const { password, title, contents } = data;
+      const myVariables = { boardId: id };
+      if (password) myVariables.password = password;
+      if (title) myVariables.title = title;
+      if (contents) myVariables.contents = contents;
+
       const res = await updateBoardAPI({
-        variables: {
-          boardId: id,
-          password,
-          title,
-          contents,
-        },
+        variables: myVariables,
       });
 
       const updateId = res.data.updateBoard._id;

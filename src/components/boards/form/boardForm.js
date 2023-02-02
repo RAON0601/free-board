@@ -24,8 +24,6 @@ export default function BoardForm({
   isEdit,
   board,
 }) {
-  validateInput();
-
   return (
     <Form onSubmit={onSubmit}>
       <FormName>게시글 {isEdit ? "수정" : "등록"}</FormName>
