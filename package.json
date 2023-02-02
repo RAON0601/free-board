@@ -22,7 +22,6 @@
     "react-hook-form": "^7.43.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@emotion/babel-plugin": "11.10.2"
+    "@babel/core": "^7.20.12"
   }
 }
