@@ -3,7 +3,7 @@ import BoardListUI from "./list.presenter";
 import { FETCH_BOARDS } from "./list.queries";
 
 export default function BoardList() {
-  // const { boardList } = useQuery(FETCH_BOARDS);
-  // console.log(boardList);
-  return <BoardListUI />;
+  const { data } = useQuery(FETCH_BOARDS);
+
+  return <BoardListUI boardList={data?.fetchBoards} />;
 }

@@ -31,36 +31,15 @@ export default function BoardListUI({ boardList }) {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>1</Td>
-            <Td>제목1</Td>
-            <Td>작성자1</Td>
-            <Td>날짜1</Td>
-          </Tr>
-          <Tr>
-            <Td>1</Td>
-            <Td>제목1</Td>
-            <Td>작성자1작성자1작성자1작성자1</Td>
-            <Td>날짜1</Td>
-          </Tr>
-          <Tr>
-            <Td>1</Td>
-            <Td>제목1</Td>
-            <Td>작성자1작성자1작성자1작성자1</Td>
-            <Td>날짜1</Td>
-          </Tr>
-          <Tr>
-            <Td>1</Td>
-            <Td>제목1</Td>
-            <Td>작성자1작성자1작성자1작성자1</Td>
-            <Td>날짜1</Td>
-          </Tr>
-          <Tr>
-            <Td>1</Td>
-            <Td>제목1</Td>
-            <Td>작성자1작성자1작성자1작성자1</Td>
-            <Td>날짜1</Td>
-          </Tr>
+          {/* 아이디, 날짜 나중에 수정 */}
+          {boardList?.map((board) => (
+            <Tr key={board._id}>
+              <Td>{board._id}</Td>
+              <Td>{board.title}</Td>
+              <Td>{board.writer}</Td>
+              <Td>{board.createdAt}</Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </BoardListContainer>
