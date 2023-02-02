@@ -10,7 +10,7 @@ export type BoardListUIProps = {
     contents: string;
     likeCount: number;
     dislikeCount: number;
-    createdAt: Date;
+    createdAt: string;
   }[];
   routingDetail: (id: string) => void;
 };

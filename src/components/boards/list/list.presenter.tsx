@@ -42,7 +42,7 @@ export default function BoardListUI({
               <Td>{_id}</Td>
               <Title onClick={() => routingDetail(_id)}>{title}</Title>
               <Td>{writer}</Td>
-              <Td>{createdAt.toDateString()}</Td>
+              <Td>{createdAt}</Td>
             </Tr>
           ))}
         </Tbody>
