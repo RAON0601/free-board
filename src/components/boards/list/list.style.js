@@ -70,6 +70,11 @@ export const Th = styled.th`
   padding: 5px 0;
 `;
 
+export const Title = styled.th`
+  padding: 5px 0;
+  cursor: pointer;
+`;
+
 export const Tr = styled.tr`
   &:not(:last-child) {
     border-bottom: 1px solid #bdbdbd;

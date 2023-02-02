@@ -10,9 +10,10 @@ import {
   Th,
   Td,
   Tr,
+  Title,
 } from "./list.style";
 
-export default function BoardListUI({ boardList }) {
+export default function BoardListUI({ boardList, routingDetail }) {
   return (
     <BoardListContainer>
       <SearchSection>
@@ -32,12 +33,12 @@ export default function BoardListUI({ boardList }) {
         </Thead>
         <Tbody>
           {/* 아이디, 날짜 나중에 수정 */}
-          {boardList?.map((board) => (
-            <Tr key={board._id}>
-              <Td>{board._id}</Td>
-              <Td>{board.title}</Td>
-              <Td>{board.writer}</Td>
-              <Td>{board.createdAt}</Td>
+          {boardList?.map(({ _id, title, writer, createdAt }) => (
+            <Tr key={_id}>
+              <Td>{_id}</Td>
+              <Title onClick={() => routingDetail(_id)}>{title}</Title>
+              <Td>{writer}</Td>
+              <Td>{createdAt}</Td>
             </Tr>
           ))}
         </Tbody>

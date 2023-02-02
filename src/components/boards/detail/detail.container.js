@@ -2,7 +2,7 @@ import BoardDetailUI from "./detail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARD } from "./detail.queries";
 
-export default function BoardDetail({ id, routeBoardList }) {
+export default function BoardDetail({ id, routeBoardList, routeBoardEdit }) {
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: id,
@@ -26,5 +26,9 @@ export default function BoardDetail({ id, routeBoardList }) {
     }
   };
 
-  return <BoardDetailUI {...{ ...data?.fetchBoard, deleteBoard }} />;
+  return (
+    <BoardDetailUI
+      {...{ ...data?.fetchBoard, deleteBoard, routeBoardList, routeBoardEdit }}
+    />
+  );
 }

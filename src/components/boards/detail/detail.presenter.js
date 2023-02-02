@@ -30,6 +30,8 @@ export default function BoardDetailUI({
   dislikeCount,
   createdAt,
   deleteBoard,
+  routeBoardList,
+  routeBoardEdit,
 }) {
   return (
     <>
@@ -76,8 +78,8 @@ export default function BoardDetailUI({
         </BoardBody>
       </BoardDetail>
       <ButtonWrapper>
-        <Button>목록으로</Button>
-        <Button>수정하기</Button>
+        <Button onClick={routeBoardList}>목록으로</Button>
+        <Button onClick={() => routeBoardEdit(_id)}>수정하기</Button>
         <Button onClick={() => deleteBoard(_id)}>삭제하기</Button>
       </ButtonWrapper>
     </>
