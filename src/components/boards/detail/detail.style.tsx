@@ -1,137 +1,93 @@
-import styled from '@emotion/styled';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
-export const BoardDetail = styled.section`
-  box-sizing: border-box;
-  width: 50vw;
-  min-width: 768px;
-  margin: 0 auto;
-  padding: 0 32px 32px 32px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+import type { BoardBodyProps, BoardHeadProps, NavigationProps } from './detail.type';
+import { formatYYYYMMDD } from '@/commons/utils';
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export const BoardHeader = ({ board }: BoardHeadProps) => {
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: '30px',
+      }}
+    >
+      <Stack direction="row" justifyContent="flex-start">
+        <AccountCircleIcon sx={{ fontSize: '60px', color: 'lightgray' }} />
+        <Stack direction="column" sx={{ marginLeft: '8px' }}>
+          <Typography variant="h6" fontSize={24} fontWeight={500}>
+            {board?.writer}
+          </Typography>
 
-export const BoardHeader = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 30px;
-`;
+          <Typography variant="caption" fontSize={16} fontWeight={400} color="#828282">
+            {`Date: ${formatYYYYMMDD(String(board?.createdAt) ?? new Date().toDateString())}`}
+          </Typography>
+        </Stack>
+      </Stack>
 
-export const WriterInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-`;
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <LinkIcon fontSize="large" sx={{ color: '#FFD600', cursor: 'pointer' }} />
 
-export const WriterProfile = styled.img`
-  display: block;
-  width: 50px;
-  height: 50px;
-  margin-right: 8px;
-`;
+        <LocationOnIcon fontSize="large" sx={{ color: '#FFD600', cursor: 'pointer' }} />
+      </Stack>
+    </Box>
+  );
+};
 
-export const WriterDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+export const BoardBody = ({ board }: BoardBodyProps) => {
+  return (
+    <Stack direction="column">
+      <Typography variant="h2" fontSize={36} fontWeight={700} gutterBottom>
+        {board?.title ?? '제목'}
+      </Typography>
 
-export const Writer = styled.h5`
-  font-size: 24px;
-  font-weight: 500;
-  color: black;
-`;
+      {/* 이미지 있고 없고 처리는 나중에 하고 */}
+      <Typography variant="h2" fontSize={16} fontWeight={400}>
+        {board?.contents ?? '기본 텍스트'}
+      </Typography>
 
-export const CreateBoardDate = styled.span`
-  font-size: 16px;
-  font-weight: 400;
-  color: #828282;
-`;
+      {/* 동영상 있고 없고 처리는 나중에 하고 */}
 
-export const MoreMenu = styled.ul`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+      <Stack direction="row" justifyContent="center" sx={{ marginTop: '300px' }} spacing={4}>
+        <Stack direction="column" alignItems="center">
+          <ThumbUpIcon sx={{ color: '#FFD600', cursor: 'pointer' }} />
 
-export const Menu = styled.li`
-  list-style: none;
-  &:not(:last-child) {
-    margin-right: 8px;
-  }
-`;
+          <Typography variant="caption" fontSize={18} sx={{ color: '#bdbdbd' }}>
+            {board?.likeCount ?? 0}
+          </Typography>
+        </Stack>
 
-export const MenuImage = styled.img``;
+        <Stack direction="column" alignItems="center">
+          <ThumbDownOffAltIcon sx={{ color: '#bdbdbd', cursor: 'pointer' }} />
 
-export const DivideLine = styled.div`
-  width: 100%;
-  height: 1px;
-  border-top: 1px solid #bdbdbd;
-  margin-top: 12px;
-  margin-bottom: 36px;
-`;
+          <Typography variant="caption" fontSize={18} sx={{ color: '#bdbdbd' }}>
+            {board?.dislikeCount ?? 0}
+          </Typography>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+};
 
-export const BoardBody = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Title = styled.h1`
-  font-size: 36px;
-  font-weight: 700;
-  text-align: start;
-  margin-bottom: 50px;
-`;
-
-export const Content = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Noto Sans CJK KR';
-`;
-
-export const RecommendWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 300px;
-`;
-
-export const Recommend = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-`;
-
-export const RecommendImage = styled.img`
-  margin-bottom: 4px;
-`;
-
-export const RecommendText = styled.span`
-  font-size: 18px;
-  color: #828282;
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 60px;
-`;
-
-export const Button = styled.button`
-  width: 200px;
-  background-color: #fff;
-  border: 1px solid #bdbdbd;
-  padding: 14px 60px;
-  margin-right: 16px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+export const Navigation = ({ board, routeBoardList, routeBoardEdit, deleteBoard }: NavigationProps) => {
+  return (
+    <Stack direction="row" justifyContent="center" sx={{ marginTop: '60px' }} spacing={4}>
+      <Button size="large" variant="outlined" color="black" onClick={routeBoardList}>
+        목록으로
+      </Button>
+      <Button size="large" variant="outlined" color="black" onClick={() => routeBoardEdit(board?._id ?? '')}>
+        수정하기
+      </Button>
+      <Button size="large" variant="outlined" color="black" onClick={() => deleteBoard(board?._id ?? '')}>
+        삭제하기
+      </Button>
+    </Stack>
+  );
+};
