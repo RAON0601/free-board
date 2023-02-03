@@ -18,8 +18,8 @@ import {
   RecommendImage,
   RecommendText,
   ButtonWrapper,
-  Button,
 } from './detail.style';
+import Button from '@mui/material/Button';
 import { type BoardDetailUIProps } from './detail.type';
 
 export default function BoardDetailUI({ board, deleteBoard, routeBoardList, routeBoardEdit }: BoardDetailUIProps) {
@@ -67,9 +67,15 @@ export default function BoardDetailUI({ board, deleteBoard, routeBoardList, rout
         </BoardBody>
       </BoardDetail>
       <ButtonWrapper>
-        <Button onClick={routeBoardList}>목록으로</Button>
-        <Button onClick={() => routeBoardEdit(board?._id ?? '')}>수정하기</Button>
-        <Button onClick={() => deleteBoard(board?._id ?? '')}>삭제하기</Button>
+        <Button size="large" variant="outlined" onClick={routeBoardList}>
+          목록으로
+        </Button>
+        <Button size="large" variant="outlined" onClick={() => routeBoardEdit(board?._id ?? '')}>
+          수정하기
+        </Button>
+        <Button size="large" variant="outlined" onClick={() => deleteBoard(board?._id ?? '')}>
+          삭제하기
+        </Button>
       </ButtonWrapper>
     </>
   );
