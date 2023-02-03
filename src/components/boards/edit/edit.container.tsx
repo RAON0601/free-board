@@ -6,6 +6,9 @@ import { makeObjectFrom, validateObjectValue } from "@/commons/utils";
 import { FETCH_BOARD, UPDATE_BOARD } from "../board.queries";
 import { BoardEditProps, updateBoardRequest } from "./edit.types";
 
+/**
+ * graph ql 관련 tpye 지정 나중에 하기
+ */
 export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
   const [updateBoardAPI] = useMutation(UPDATE_BOARD);
 

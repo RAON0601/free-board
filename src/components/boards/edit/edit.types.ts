@@ -1,6 +1,14 @@
 import { BaseSyntheticEvent } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
+export type BoardEditInput = {
+  title: string;
+  password: string;
+  contents: string;
+};
+
+export type BoardEditValidateFields = ("title" | "contents" | "password")[];
+
 export type BoardEditProps = {
   id: string;
   routeBoardDetail: (id: string) => void;

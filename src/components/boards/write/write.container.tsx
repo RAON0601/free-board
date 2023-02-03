@@ -1,7 +1,7 @@
 import BoardWriteUI from "./write.presenter";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { makeObjectFrom, validateObjectValue } from "@/commons/utils";
+import { makeObjectFrom, validateObjectValue } from "@/utils";
 import { CREATE_BOARD } from "../board.queries";
 import { BoardWriteProps } from "./write.types";
 

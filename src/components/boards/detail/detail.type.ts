@@ -1,11 +1,7 @@
+import { Board, Query } from "@/commons/types/types";
+
 export type BoardDetailUIProps = {
-  _id: string;
-  writer: string;
-  title: string;
-  contents: string;
-  likeCount: number;
-  dislikeCount: number;
-  createdAt: Date;
+  fetchBoard?: Board;
   deleteBoard: (id: string) => void;
   routeBoardList: () => void;
   routeBoardEdit: (id: string) => void;
