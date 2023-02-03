@@ -1,4 +1,4 @@
-import { Board } from "@/commons/types/types";
+import { Board } from '@/commons/types/types';
 
 export type BoardListProps = {
   routingDetail: (id: string) => void;

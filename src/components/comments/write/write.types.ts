@@ -1,30 +1,26 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { BaseSyntheticEvent } from "react";
+import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import { type BaseSyntheticEvent } from 'react';
 
-export type CommentWriteProps = {
+export interface CommentWriteProps {
   boardId: string;
-};
+}
 
-export type CommentWriteUIProps = {
+export interface CommentWriteUIProps {
   register: UseFormRegister<CommentCreateInput>;
-  onSubmit: (
-    e?: BaseSyntheticEvent<object, any, any> | undefined
-  ) => Promise<void>;
+  onSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
   errors: FieldErrors<CommentCreateInput>;
-};
+}
 
-export type CommentFormProps = {
+export interface CommentFormProps {
   register: UseFormRegister<CommentCreateInput>;
-  onSubmit: (
-    e?: BaseSyntheticEvent<object, any, any> | undefined
-  ) => Promise<void>;
+  onSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
   errors: FieldErrors<CommentCreateInput>;
-};
+}
 
-export type CommentCreateInput = {
+export interface CommentCreateInput {
   writer: string;
   password: string;
   contents: string;
-};
+}
 
-export type ValidateFieldNames = ("writer" | "password" | "contents")[];
+export type ValidateFieldNames = Array<'writer' | 'password' | 'contents'>;

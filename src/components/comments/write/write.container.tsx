@@ -1,10 +1,10 @@
-import { useMutation } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import { CREATE_COMMENT, FETCH_COMMENT } from "../comments.queries";
-import CommentWriteUI from "./write.presenter";
-import { CommentCreateInput, CommentWriteProps } from "./write.types";
+import { useMutation } from '@apollo/client';
+import { useForm } from 'react-hook-form';
+import { CREATE_COMMENT, FETCH_COMMENT } from '../comments.queries';
+import CommentWriteUI from './write.presenter';
+import type { CommentCreateInput, CommentWriteProps } from './write.types';
 
-const MAX_CONTENTS = 100;
+// const MAX_CONTENTS = 100;
 
 export default function CommentWrite({ boardId }: CommentWriteProps) {
   const [createCommentAPI] = useMutation(CREATE_COMMENT);
@@ -17,7 +17,7 @@ export default function CommentWrite({ boardId }: CommentWriteProps) {
     formState: { errors },
   } = useForm<CommentCreateInput>();
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async data => {
     try {
       const { writer, contents, password } = data;
       await createCommentAPI({
@@ -39,15 +39,15 @@ export default function CommentWrite({ boardId }: CommentWriteProps) {
       });
 
       reset();
-      alert("댓글 등록이 완료 되었습니다.");
+      alert('댓글 등록이 완료 되었습니다.');
     } catch (err) {
       console.log(err);
-      alert("댓글 등록이 실패 했습니다");
+      alert('댓글 등록이 실패 했습니다');
     }
   });
 
   // TODO 이거 나중에 작업
-  const curContent = watch("contents");
+  const curContent = watch('contents');
   console.log(curContent);
 
   return <CommentWriteUI {...{ register, onSubmit, errors }} />;

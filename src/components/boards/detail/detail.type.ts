@@ -1,14 +1,14 @@
-import { Board, Query } from "@/commons/types/types";
+import type { Board } from '@/commons/types/types';
 
-export type BoardDetailUIProps = {
+export interface BoardDetailUIProps {
   board?: Board;
   deleteBoard: (id: string) => void;
   routeBoardList: () => void;
   routeBoardEdit: (id: string) => void;
-};
+}
 
-export type BoardDetailProps = {
+export interface BoardDetailProps {
   boardId: string;
   routeBoardList: () => void;
   routeBoardEdit: (id: string) => void;
-};
+}

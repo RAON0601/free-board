@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const BoardDetail = styled.section`
   box-sizing: border-box;
@@ -90,7 +90,7 @@ export const Title = styled.h1`
 export const Content = styled.p`
   font-size: 16px;
   font-weight: 400;
-  font-family: "Noto Sans CJK KR";
+  font-family: 'Noto Sans CJK KR';
 `;
 
 export const RecommendWrapper = styled.div`

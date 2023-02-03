@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ButtonBlack = styled.button`
   background-color: black;
@@ -18,8 +18,8 @@ export const ButtonYellow = styled.button`
 `;
 
 export const CreateBoardButton = styled.button<{ backgroundColor?: string }>`
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "white"};
-  color: ${({ color }) => color ?? "black"};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? 'white'};
+  color: ${({ color }) => color ?? 'black'};
   font-size: 16px;
   font-weight: 600;
   padding: 14px 60px;

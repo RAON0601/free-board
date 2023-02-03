@@ -3,7 +3,7 @@ export const makeObjectFrom = (keys: string[], values: any[]) => {
   if (keys.length !== values.length) return;
 
   const length = keys.length;
-  const arr: [string, any][] = [];
+  const arr: Array<[string, any]> = [];
 
   for (let i = 0; i < length; i++) {
     arr.push([keys[i], values[i]]);

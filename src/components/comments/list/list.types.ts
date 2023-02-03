@@ -1,9 +1,9 @@
-import { BoardComment } from "@/commons/types/types";
+import type { BoardComment } from '@/commons/types/types';
 
-export type CommentListProps = {
+export interface CommentListProps {
   boardId: string;
-};
+}
 
-export type CommentListUIProps = {
-  commentList?: Partial<BoardComment>[];
-};
+export interface CommentListUIProps {
+  commentList?: Array<Partial<BoardComment>>;
+}

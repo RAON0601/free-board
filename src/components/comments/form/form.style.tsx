@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -50,11 +50,11 @@ export const ButtonWrapper = styled.div`
   padding-left: 10px;
 `;
 
-export const SubmitButton = styled.button<{ color: "black" | "yellow" }>`
+export const SubmitButton = styled.button<{ color: 'black' | 'yellow' }>`
   width: 100px;
   height: 52px;
-  background-color: ${({ color }) => (color === "black" ? "black" : "#FFD600")};
-  color: ${({ color }) => (color === "black" ? "white" : "black")};
+  background-color: ${({ color }) => (color === 'black' ? 'black' : '#FFD600')};
+  color: ${({ color }) => (color === 'black' ? 'white' : 'black')};
   font-size: 16px;
   font-weight: 500;
 `;
