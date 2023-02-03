@@ -1,5 +1,26 @@
 import styled from "@emotion/styled";
 
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;
+
+export const Title = styled.h5`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const WriterInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+
+  div {
+    margin-right: 16px;
+  }
+`;
+
 export const Form = styled.form`
   width: 50vw;
   min-width: 768px;

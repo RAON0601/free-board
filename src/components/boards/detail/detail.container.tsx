@@ -4,7 +4,7 @@ import { DELETE_BOARD, FETCH_BOARD } from "../board.queries";
 import { BoardDetailProps } from "./detail.type";
 
 export default function BoardDetail({
-  id,
+  boardId,
   routeBoardList,
   routeBoardEdit,
 }: BoardDetailProps) {
@@ -12,7 +12,7 @@ export default function BoardDetail({
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: id,
+      boardId: boardId,
     },
   });
 

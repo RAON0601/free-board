@@ -5,7 +5,7 @@ import CommentList from "@/components/comments/list/list.container";
 
 export default function BoardDetailPage() {
   const router = useRouter();
-  const id = router.query.id as string;
+  const boardId = router.query.id as string;
 
   const routeBoardList = () => {
     router.push("/boards");
@@ -17,8 +17,8 @@ export default function BoardDetailPage() {
 
   return (
     <>
-      <BoardDetail {...{ id, routeBoardList, routeBoardEdit }} />{" "}
-      <CommentWrite />
+      <BoardDetail {...{ boardId, routeBoardList, routeBoardEdit }} />{" "}
+      <CommentWrite {...{ boardId }} />
       <CommentList />
     </>
   );

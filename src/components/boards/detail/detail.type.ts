@@ -12,7 +12,7 @@ export type BoardDetailUIProps = {
 };
 
 export type BoardDetailProps = {
-  id: string;
+  boardId: string;
   routeBoardList: () => void;
   routeBoardEdit: (id: string) => void;
 };
