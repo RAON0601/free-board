@@ -25,6 +25,10 @@ export const ImageUploadButton = styled(IconButton)<IconButtonProps | { componen
 `;
 
 export const YellowTextField = styled(TextField)`
+  .MuiInputBase-root {
+    height: 100%;
+  }
+
   & label.Mui-focused {
     color: black;
   }
