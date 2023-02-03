@@ -2,7 +2,7 @@ import BoardDetailUI from "./detail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARD } from "../board.queries";
 import { BoardDetailProps } from "./detail.type";
-import { Query } from "@/commons/types/types";
+import { Mutation, Query, QueryFetchBoardArgs } from "@/commons/types/types";
 
 export default function BoardDetail({
   boardId,
@@ -11,11 +11,14 @@ export default function BoardDetail({
 }: BoardDetailProps) {
   const [deleteBoardAPI] = useMutation(DELETE_BOARD);
 
-  const { data } = useQuery<Pick<Query, "fetchBoard">>(FETCH_BOARD, {
-    variables: {
-      boardId: boardId,
-    },
-  });
+  const { data } = useQuery<Pick<Query, "fetchBoard">, QueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: boardId,
+      },
+    }
+  );
 
   const deleteBoard = async (id: string) => {
     try {
@@ -35,7 +38,7 @@ export default function BoardDetail({
   return (
     <BoardDetailUI
       {...{
-        ...data?.fetchBoard,
+        board: data?.fetchBoard,
         deleteBoard,
         routeBoardList,
         routeBoardEdit,

@@ -4,19 +4,26 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { makeObjectFrom, validateObjectValue } from "@/commons/utils";
 import { FETCH_BOARD, UPDATE_BOARD } from "../board.queries";
-import { BoardEditProps, updateBoardRequest } from "./edit.types";
+import {
+  BoardEditInput,
+  BoardEditProps,
+  BoardEditValidateFields,
+  updateBoardRequest,
+} from "./edit.types";
+import { Board, Query, QueryFetchBoardArgs } from "@/commons/types/types";
 
-/**
- * graph ql 관련 tpye 지정 나중에 하기
- */
 export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
-  const [updateBoardAPI] = useMutation(UPDATE_BOARD);
+  const [updateBoardAPI] =
+    useMutation<Record<"updateBoard", Pick<Board, "_id">>>(UPDATE_BOARD);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: id,
-    },
-  });
+  const { data } = useQuery<Pick<Query, "fetchBoard">, QueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: id,
+      },
+    }
+  );
 
   const [isEdit, setEdit] = useState(false);
 
@@ -25,16 +32,24 @@ export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<BoardEditInput>({
     defaultValues: {
       title: "",
       contents: "",
       password: "",
     },
-    values: data?.fetchBoard,
+    values: {
+      title: data?.fetchBoard.title || "",
+      password: "",
+      contents: data?.fetchBoard.contents || "",
+    },
   });
 
-  const validateFieldNames = ["title", "contents", "password"];
+  const validateFieldNames: BoardEditValidateFields = [
+    "title",
+    "contents",
+    "password",
+  ];
   const validateFields = watch(validateFieldNames);
 
   const validateInput = () =>
@@ -52,7 +67,7 @@ export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
         variables: myVariables,
       });
 
-      const updateId = res.data.updateBoard._id;
+      const updateId = res.data?.updateBoard._id!!;
       alert("게시글 수정이 완료 되었습니다!");
       routeBoardDetail(updateId);
     } catch (error) {

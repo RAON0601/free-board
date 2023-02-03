@@ -1,3 +1,4 @@
+import { Board } from "@/commons/types/types";
 import { BaseSyntheticEvent } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
@@ -22,15 +23,7 @@ export type BoardEditUIProps = {
   errors: FieldErrors<any>;
   validateInput: () => boolean;
   isEdit: boolean;
-  board?: {
-    _id: string;
-    writer: string;
-    title: string;
-    contents: string;
-    likeCount: number;
-    dislikeCount: number;
-    createdAt: Date;
-  };
+  board?: Board;
 };
 
 export type updateBoardRequest = {

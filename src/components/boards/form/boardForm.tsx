@@ -36,7 +36,7 @@ export default function BoardForm({
             {...register("writer", {
               required: "작성자는 필수 입력값 입니다.",
             })}
-            defaultValue={board?.writer}
+            defaultValue={board?.writer || ""}
           />
           {errors.writer && (
             <InputError>{`${errors.writer.message}`}</InputError>

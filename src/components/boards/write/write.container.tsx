@@ -1,12 +1,14 @@
 import BoardWriteUI from "./write.presenter";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { makeObjectFrom, validateObjectValue } from "@/utils";
+import { makeObjectFrom, validateObjectValue } from "@/commons/utils";
 import { CREATE_BOARD } from "../board.queries";
 import { BoardWriteProps } from "./write.types";
+import { Board } from "@/commons/types/types";
 
 export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
-  const [createBoardAPI] = useMutation(CREATE_BOARD);
+  const [createBoardAPI] =
+    useMutation<Record<"createBoard", Pick<Board, "_id">>>(CREATE_BOARD);
 
   const {
     register,
@@ -33,7 +35,7 @@ export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
         },
       });
 
-      const createdId = res.data.createBoard._id;
+      const createdId = res.data?.createBoard._id!!;
       alert("게시글 등록이 완료 되었습니다!");
       routeBoardDetail(createdId);
     } catch (error) {
