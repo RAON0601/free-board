@@ -2,7 +2,7 @@ import BoardEditUI from "./edit.presenter";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { makeObjectFrom, validateObjectValue } from "@/utils";
+import { makeObjectFrom, validateObjectValue } from "@/commons/utils";
 import { FETCH_BOARD, UPDATE_BOARD } from "../board.queries";
 import { BoardEditProps, updateBoardRequest } from "./edit.types";
 
