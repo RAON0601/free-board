@@ -12,6 +12,7 @@ export default function CommentWrite({ boardId }: CommentWriteProps) {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm<CommentCreateInput>();
@@ -37,6 +38,7 @@ export default function CommentWrite({ boardId }: CommentWriteProps) {
         ],
       });
 
+      reset();
       alert("댓글 등록이 완료 되었습니다.");
     } catch (err) {
       console.log(err);
