@@ -7,32 +7,24 @@ import {
   WriterBox,
   Content,
 } from "./list.style";
+import { CommentListUIProps } from "./list.types";
 
-export default function CommentListUI() {
+export default function CommentListUI({ commentList }: CommentListUIProps) {
   return (
     <CommentContainer>
-      <CommentItem>
-        <span>프로필이미지</span>
-        <ItemRight>
-          <WriterBox>
-            <Writer>이름</Writer>
-            <span style={{ marginLeft: "8px" }}>⭐⭐⭐⭐⭐</span>
-          </WriterBox>
-          <Content>댓글 내용입니더</Content>
-          <CreatedAt>2023-02-03</CreatedAt>
-        </ItemRight>
-      </CommentItem>
-      <CommentItem>
-        <span>프로필이미지</span>
-        <ItemRight>
-          <WriterBox>
-            <Writer>이름</Writer>
-            <span style={{ marginLeft: "8px" }}>⭐⭐⭐⭐⭐</span>
-          </WriterBox>
-          <Content>댓글 내용입니더</Content>
-          <CreatedAt>2023-02-03</CreatedAt>
-        </ItemRight>
-      </CommentItem>
+      {commentList?.map((comment) => (
+        <CommentItem>
+          <span>프로필이미지</span>
+          <ItemRight>
+            <WriterBox>
+              <Writer>{comment.writer}</Writer>
+              <span style={{ marginLeft: "8px" }}>{comment.rating}</span>
+            </WriterBox>
+            <Content>{comment.contents}</Content>
+            <CreatedAt>{comment.createdAt}</CreatedAt>
+          </ItemRight>
+        </CommentItem>
+      ))}
     </CommentContainer>
   );
 }

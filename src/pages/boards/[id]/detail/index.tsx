@@ -19,7 +19,7 @@ export default function BoardDetailPage() {
     <>
       <BoardDetail {...{ boardId, routeBoardList, routeBoardEdit }} />{" "}
       <CommentWrite {...{ boardId }} />
-      <CommentList />
+      <CommentList {...{ boardId }} />
     </>
   );
 }
