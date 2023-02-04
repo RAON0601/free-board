@@ -1,4 +1,4 @@
-import type { Board } from '@/commons/types/types';
+import type { Board, UpdateBoardInput } from '@/commons/types/types';
 import type { BaseSyntheticEvent } from 'react';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
@@ -16,9 +16,4 @@ export interface BoardEditUIProps {
   board?: Board;
 }
 
-export interface updateBoardRequest {
-  boardId: string;
-  password?: string;
-  title?: string;
-  contents?: string;
-}
+export type UpdateBoardRequest = Partial<UpdateBoardInput> & { password?: string; boardId: string };

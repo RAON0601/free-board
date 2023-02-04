@@ -1,8 +1,24 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_BOARD = gql`
-  mutation createBoard($writer: String, $title: String!, $contents: String!, $password: String!) {
-    createBoard(createBoardInput: { writer: $writer, title: $title, contents: $contents, password: $password }) {
+  mutation createBoard(
+    $writer: String
+    $title: String!
+    $contents: String!
+    $password: String!
+    $boardAddress: BoardAddressInput
+    $youtubeUrl: String
+  ) {
+    createBoard(
+      createBoardInput: {
+        writer: $writer
+        title: $title
+        contents: $contents
+        password: $password
+        boardAddress: $boardAddress
+        youtubeUrl: $youtubeUrl
+      }
+    ) {
       _id
     }
   }
@@ -18,6 +34,12 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       createdAt
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -34,8 +56,19 @@ export const FETCH_BOARDS = gql`
 `;
 
 export const UPDATE_BOARD = gql`
-  mutation updateBoard($title: String!, $contents: String!, $password: String!, $boardId: ID!) {
-    updateBoard(updateBoardInput: { title: $title, contents: $contents }, password: $password, boardId: $boardId) {
+  mutation updateBoard(
+    $title: String!
+    $contents: String!
+    $password: String!
+    $boardId: ID!
+    $youtubeUrl: String
+    $boardAddress: BoardAddressInput
+  ) {
+    updateBoard(
+      updateBoardInput: { title: $title, contents: $contents, boardAddress: $boardAddress, youtubeUrl: $youtubeUrl }
+      password: $password
+      boardId: $boardId
+    ) {
       _id
     }
   }

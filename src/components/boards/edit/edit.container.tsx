@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { FETCH_BOARD, UPDATE_BOARD } from '../board.queries';
-import type { BoardEditProps, updateBoardRequest } from './edit.types';
+import type { BoardEditProps, UpdateBoardRequest } from './edit.types';
 import type { Board, Query, QueryFetchBoardArgs } from '@/commons/types/types';
 import BoardForm from '../form/boardForm.container';
 import { type BoardInputType } from '../form/boardForm.types';
@@ -18,11 +18,20 @@ export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
 
   const onSubmit = async (data: BoardInputType) => {
     try {
-      const { password, title, contents } = data;
-      const myVariables: updateBoardRequest = { boardId: id };
+      const { password, title, contents, boardAddress, youtubeUrl } = data;
+      const myVariables: UpdateBoardRequest = { boardId: id, password };
+
       if (password) myVariables.password = password;
       if (title) myVariables.title = title;
       if (contents) myVariables.contents = contents;
+      if (youtubeUrl) myVariables.youtubeUrl = youtubeUrl;
+      if (boardAddress) {
+        myVariables.boardAddress = {
+          address: boardAddress.address,
+          zipcode: boardAddress.zipcode,
+          addressDetail: boardAddress.addressDetail,
+        };
+      }
 
       const res = await updateBoardAPI({
         variables: myVariables,
@@ -47,7 +56,7 @@ export default function BoardEdit({ id, routeBoardDetail }: BoardEditProps) {
         onSubmitHandler: onSubmit,
         validateFieldNames,
         isEdit: true,
-        board: data,
+        board: data?.fetchBoard,
       }}
     />
   );

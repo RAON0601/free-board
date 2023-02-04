@@ -1,27 +1,38 @@
-import { type Query } from '@/commons/types/types';
+import { type Board } from '@/commons/types/types';
 import { type BoardInputType } from './boardForm.types';
 import { useForm } from 'react-hook-form';
 
-export const useEditBoardForm = (data?: Pick<Query, 'fetchBoard'>) => {
+export const useEditBoardForm = (data?: Board) => {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<BoardInputType>({
     defaultValues: {
+      writer: '',
       title: '',
       contents: '',
       password: '',
+      youtubeUrl: '',
+      boardAddress: {
+        address: '',
+        addressDetail: '',
+        zipcode: '',
+      },
     },
     values: {
-      title: data?.fetchBoard.title ?? '',
+      writer: data?.writer,
+      title: data?.title ?? '',
       password: '',
-      contents: data?.fetchBoard.contents ?? '',
+      contents: data?.contents ?? '',
+      youtubeUrl: data?.youtubeUrl ?? '',
+      boardAddress: data?.boardAddress,
     },
   });
 
-  return { register, handleSubmit, watch, errors };
+  return { register, handleSubmit, watch, setValue, errors };
 };
 
 export const useWriteBoardForm = () => {
@@ -29,8 +40,9 @@ export const useWriteBoardForm = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<BoardInputType>();
 
-  return { register, handleSubmit, watch, errors };
+  return { register, handleSubmit, watch, setValue, errors };
 };

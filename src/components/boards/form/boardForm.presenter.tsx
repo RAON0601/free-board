@@ -25,15 +25,17 @@ export default function BoardFormUI({
   board,
   toggleAddressModal,
   addressModalStatus,
+  onAddressInput,
 }: BoardFormUIProps) {
-  console.log(isEdit, 'form 컴포넌트');
+  console.log('board', board);
+  console.log(board?.writer);
 
   return (
     <Form onSubmit={onSubmit}>
       {addressModalStatus && (
         <Modal open={true} onClose={toggleAddressModal}>
           <ModalContentWrapper>
-            <DaumPostcodeEmbed onComplete={data => console.log(data)} />
+            <DaumPostcodeEmbed onComplete={onAddressInput} />
           </ModalContentWrapper>
         </Modal>
       )}
@@ -54,7 +56,7 @@ export default function BoardFormUI({
             {...register('writer', {
               required: '작성자는 필수 입력값 입니다.',
             })}
-            defaultValue={board?.writer ?? ''}
+            defaultValue={board?.writer?.toString()}
           />
         </Stack>
 
@@ -84,7 +86,6 @@ export default function BoardFormUI({
             helperText={errors?.title?.message?.toString() ?? ''}
             placeholder="제목을 작성해주세요"
             {...register('title', { required: '제목은 필수 입력값 입니다.' })}
-            defaultValue={board?.title}
           />
         </Stack>
       </Stack>
@@ -103,7 +104,6 @@ export default function BoardFormUI({
             {...register('contents', {
               required: '내용은 필수 입력값 입니다.',
             })}
-            defaultValue={board?.title}
           />
         </Stack>
       </Stack>
@@ -121,7 +121,7 @@ export default function BoardFormUI({
         spacing={2}
         sx={{ width: '100%', marginTop: '16px' }}
       >
-        <YellowTextField placeholder="07250" InputProps={{ readOnly: true }} {...register('address1')} />
+        <YellowTextField placeholder="07250" InputProps={{ readOnly: true }} {...register('boardAddress.zipcode')} />
 
         <PostButton color="black" variant="contained" onClick={toggleAddressModal}>
           우편번호 검색
@@ -130,13 +130,13 @@ export default function BoardFormUI({
 
       <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%', marginTop: '16px' }}>
         <Stack direction="column" sx={{ width: '100%' }}>
-          <YellowTextField InputProps={{ readOnly: true }} {...register('address2')} />
+          <YellowTextField InputProps={{ readOnly: true }} {...register('boardAddress.address')} />
         </Stack>
       </Stack>
 
       <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%', marginTop: '16px' }}>
         <Stack direction="column" sx={{ width: '100%' }}>
-          <YellowTextField {...register('address3')} />
+          <YellowTextField {...register('boardAddress.addressDetail')} />
         </Stack>
       </Stack>
 
@@ -145,7 +145,7 @@ export default function BoardFormUI({
           <Typography variant="subtitle2" gutterBottom fontWeight={700}>
             유튜브
           </Typography>
-          <YellowTextField placeholder="링크를 복사해주세요" {...register('youtubeLink')} />
+          <YellowTextField placeholder="링크를 복사해주세요" {...register('youtubeUrl')} />
         </Stack>
       </Stack>
 

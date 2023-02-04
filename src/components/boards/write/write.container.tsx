@@ -17,13 +17,15 @@ export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
 
   const onSubmit = async (data: BoardInputType) => {
     try {
-      const { writer, password, title, contents } = data;
+      const { password, title, contents, boardAddress, youtubeUrl, writer } = data;
       const res = await createBoardAPI({
         variables: {
           writer,
           password,
           title,
           contents,
+          youtubeUrl,
+          boardAddress,
         },
       });
 
