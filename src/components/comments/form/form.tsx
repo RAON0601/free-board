@@ -1,43 +1,57 @@
-import { Input, InputError, InputFieldSmall } from '@/components/commons/form/input.style';
+import { Rating, Stack, Typography } from '@mui/material';
 import type { CommentFormProps } from '../write/write.types';
-import { ButtonWrapper, Form, SubmitButton, TextArea, Title, TitleContainer, WriterInputWrapper } from './form.style';
+import { Form } from './form.style';
+import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
+import { SubmitButton, YellowTextField } from '@/components/boards/form/boardForm.style';
 
 export default function CommentForm({ register, onSubmit, errors }: CommentFormProps) {
   return (
     <Form onSubmit={onSubmit}>
-      <TitleContainer>
-        <span style={{ marginRight: '8px' }}>🎁</span> <Title>댓글</Title>
-      </TitleContainer>
-      <span style={{ marginBottom: '20px', marginTop: '20px' }}>⭐⭐⭐⭐⭐</span>
-      <WriterInputWrapper>
-        <InputFieldSmall>
-          <Input placeholder="작성자" {...register('writer', { required: '작성자는 필수 입력값입니다!' })} />
-          {errors.writer && <InputError>{errors.writer.message}</InputError>}
-        </InputFieldSmall>
-        <InputFieldSmall>
-          <Input
-            placeholder="비밀번호"
-            type="password"
-            {...register('password', {
-              required: '비밀번호는 필수 입력값입니다!',
-            })}
-          />
-          {errors.password && <InputError>{errors.password.message}</InputError>}
-        </InputFieldSmall>
-      </WriterInputWrapper>
-      <TextArea
-        placeholder="댓글을 작성해주세요!"
+      <Stack flexDirection="row" sx={{ margin: '20px 0' }}>
+        <SpeakerNotesIcon sx={{ color: '#FFD600', marginRight: '8px' }} />
+        <Typography variant="subtitle2" gutterBottom fontWeight={700}>
+          작성자
+        </Typography>
+      </Stack>
+
+      <Rating sx={{ marginBottom: '10px' }} />
+
+      <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', marginBottom: '24px' }}>
+        <YellowTextField
+          sx={{ width: '48%' }}
+          error={!!errors.writer}
+          helperText={errors?.writer?.message?.toString() ?? ''}
+          placeholder="이름을 적어주세요"
+          {...register('writer', {
+            required: '작성자는 필수 입력값 입니다.',
+          })}
+        />
+
+        <YellowTextField
+          sx={{ width: '48%' }}
+          type="password"
+          error={!!errors.password}
+          helperText={errors?.password?.message?.toString() ?? ''}
+          placeholder="비밀번호를 입력해주세요"
+          {...register('password', {
+            required: '비밀번호는 필수 입력값 입니다.',
+          })}
+        />
+      </Stack>
+
+      <YellowTextField
+        multiline
+        rows={5}
+        error={!!errors.contents}
+        helperText={errors?.contents?.message?.toString() ?? ''}
         {...register('contents', {
-          required: true,
-          maxLength: 10,
+          required: '댓글을 작성해주세요!',
         })}
       />
-      <ButtonWrapper>
-        <span>0/100</span>
-        <SubmitButton color="black">등록하기</SubmitButton>
-      </ButtonWrapper>
-      {errors.contents?.type === 'required' && <InputError>댓글을 작성해주세요!</InputError>}
-      {errors.contents?.type === 'maxLength' && <InputError>최대 100자만 입력 가능합니다</InputError>}
+
+      <SubmitButton type="submit" color="black" variant="contained">
+        등록하기
+      </SubmitButton>
     </Form>
   );
 }

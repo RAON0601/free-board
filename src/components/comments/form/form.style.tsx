@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { Box } from '@mui/material';
+import { type FormProps } from './form.type';
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -21,14 +23,14 @@ export const WriterInputWrapper = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  width: 50vw;
-  min-width: 768px;
-  border-top: 1px solid #bdbdbd;
-  display: flex;
-  flex-direction: column;
-  margin: 60px auto 0 auto;
-`;
+// export const Form = styled.form`
+//   width: 50vw;
+//   min-width: 768px;
+//   border-top: 1px solid #bdbdbd;
+//   display: flex;
+//   flex-direction: column;
+//   margin: 60px auto 0 auto;
+// `;
 
 export const TextArea = styled.textarea`
   padding-top: 10px;
@@ -58,3 +60,21 @@ export const SubmitButton = styled.button<{ color: 'black' | 'yellow' }>`
   font-size: 16px;
   font-weight: 500;
 `;
+
+export const Form = ({ children, onSubmit }: FormProps) => {
+  return (
+    <Box
+      component="form"
+      onSubmit={onSubmit}
+      sx={{
+        width: '50vw',
+        minWidth: '768px',
+        margin: '60px auto 0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
