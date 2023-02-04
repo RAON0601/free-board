@@ -1,15 +1,43 @@
-import type { BoardFormProps } from './boardForm.types';
-import { Form, ImageUploadButton, PostButton, SubmitButton, YellowTextField } from './boardForm.style';
+import type { BoardFormUIProps } from './boardForm.types';
+import {
+  Form,
+  ImageUploadButton,
+  ModalContentWrapper,
+  PostButton,
+  SubmitButton,
+  YellowTextField,
+} from './boardForm.style';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AddIcon from '@mui/icons-material/Add';
+import Modal from '@mui/material/Modal';
+import DaumPostcodeEmbed from 'react-daum-postcode';
 
-export default function BoardForm({ onSubmit, register, errors, validateInput, isEdit, board }: BoardFormProps) {
+export default function BoardFormUI({
+  onSubmit,
+  register,
+  errors,
+  validateInput,
+  isEdit,
+  board,
+  toggleAddressModal,
+  addressModalStatus,
+}: BoardFormUIProps) {
+  console.log(isEdit, 'form 컴포넌트');
+
   return (
     <Form onSubmit={onSubmit}>
+      {addressModalStatus && (
+        <Modal open={true} onClose={toggleAddressModal}>
+          <ModalContentWrapper>
+            <DaumPostcodeEmbed onComplete={data => console.log(data)} />
+          </ModalContentWrapper>
+        </Modal>
+      )}
+
       <Typography variant="h3" gutterBottom fontWeight={700}>
         게시글 {isEdit ? '수정' : '등록'}
       </Typography>
@@ -93,16 +121,16 @@ export default function BoardForm({ onSubmit, register, errors, validateInput, i
         spacing={2}
         sx={{ width: '100%', marginTop: '16px' }}
       >
-        <YellowTextField placeholder="07250" {...register('address1')} />
+        <YellowTextField placeholder="07250" InputProps={{ readOnly: true }} {...register('address1')} />
 
-        <PostButton color="black" variant="contained">
+        <PostButton color="black" variant="contained" onClick={toggleAddressModal}>
           우편번호 검색
         </PostButton>
       </Stack>
 
       <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%', marginTop: '16px' }}>
         <Stack direction="column" sx={{ width: '100%' }}>
-          <YellowTextField {...register('address2')} />
+          <YellowTextField InputProps={{ readOnly: true }} {...register('address2')} />
         </Stack>
       </Stack>
 

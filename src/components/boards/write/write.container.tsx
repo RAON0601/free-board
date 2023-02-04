@@ -1,27 +1,21 @@
-import BoardWriteUI from './write.presenter';
 import { useMutation } from '@apollo/client';
-import { useForm } from 'react-hook-form';
-import { makeObjectFrom, validateObjectValue } from '@/commons/utils';
 import { CREATE_BOARD } from '../board.queries';
 import type { BoardWriteProps } from './write.types';
 import type { Board } from '@/commons/types/types';
+import BoardForm from '../form/boardForm.container';
+import { type BoardInputType } from '../form/boardForm.types';
+
+const validateFieldNames: Array<'writer' | 'password' | 'title' | 'contents'> = [
+  'writer',
+  'password',
+  'title',
+  'contents',
+];
 
 export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
   const [createBoardAPI] = useMutation<Record<'createBoard', Pick<Board, '_id'>>>(CREATE_BOARD);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const validateFieldNames = ['writer', 'password', 'title', 'contents'];
-  const validateFields = watch(validateFieldNames);
-
-  const validateInput = () => validateObjectValue(makeObjectFrom(validateFieldNames, validateFields));
-
-  const onSubmit = handleSubmit(async data => {
+  const onSubmit = async (data: BoardInputType) => {
     try {
       const { writer, password, title, contents } = data;
       const res = await createBoardAPI({
@@ -44,7 +38,15 @@ export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
-  });
+  };
 
-  return <BoardWriteUI {...{ onSubmit, register, errors, validateInput }} />;
+  return (
+    <BoardForm
+      {...{
+        onSubmitHandler: onSubmit,
+        validateFieldNames,
+        isEdit: false,
+      }}
+    />
+  );
 }

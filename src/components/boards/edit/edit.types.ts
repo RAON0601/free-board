@@ -2,14 +2,6 @@ import type { Board } from '@/commons/types/types';
 import type { BaseSyntheticEvent } from 'react';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-export interface BoardEditInput {
-  title: string;
-  password: string;
-  contents: string;
-}
-
-export type BoardEditValidateFields = Array<'title' | 'contents' | 'password'>;
-
 export interface BoardEditProps {
   id: string;
   routeBoardDetail: (id: string) => void;
