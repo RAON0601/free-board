@@ -3,11 +3,13 @@ import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_BOARD, DISLIKE_BOARD, FETCH_BOARD, LIKE_BOARD } from '../board.queries';
 import type { BoardDetailProps } from './detail.type';
 import type { Query, QueryFetchBoardArgs } from '@/commons/types/types';
+import { useErrorModal } from '../commons/modal.hook';
 
 export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }: BoardDetailProps) {
   const [deleteBoardAPI] = useMutation(DELETE_BOARD);
   const [likeBoardAPI] = useMutation(LIKE_BOARD);
   const [dislikeBoardAPI] = useMutation(DISLIKE_BOARD);
+  const { errorModalStatus, setErrorModalStatus, errorMessage, setErrorMessage, toggleErrorModal } = useErrorModal();
 
   const { data } = useQuery<Pick<Query, 'fetchBoard'>, QueryFetchBoardArgs>(FETCH_BOARD, {
     variables: {
@@ -24,7 +26,8 @@ export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }:
         refetchQueries: [FETCH_BOARD],
       });
     } catch (e) {
-      alert('서버에 에러가 발생했습니다');
+      setErrorMessage('서버에 에러가 발생했습니다');
+      setErrorModalStatus(true);
     }
   };
 
@@ -37,7 +40,8 @@ export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }:
         refetchQueries: [FETCH_BOARD],
       });
     } catch (e) {
-      alert('서버에 에러가 발생했습니다');
+      setErrorMessage('서버에 에러가 발생했습니다');
+      setErrorModalStatus(true);
     }
   };
 
@@ -52,7 +56,8 @@ export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }:
         routeBoardList();
       }
     } catch (error) {
-      alert('게시글 삭제중 에러가 발생했습니다!');
+      setErrorMessage('게시글 삭제중 에러가 발생했습니다!');
+      setErrorModalStatus(true);
     }
   };
 
@@ -65,6 +70,9 @@ export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }:
         routeBoardEdit,
         likeBoard,
         dislikeBoard,
+        errorModalStatus,
+        toggleErrorModal,
+        errorMessage,
       }}
     />
   );

@@ -52,6 +52,7 @@ export const ModalContentWrapper = ({ children }: { children: React.ReactNode })
     boxShadow: 24,
     p: 4,
   };
+
   return <Box sx={style}>{children}</Box>;
 };
 

@@ -13,6 +13,12 @@ export interface BoardFormUIProps {
   addressModalStatus: boolean;
   isEdit: boolean;
   board?: Board;
+  errorModalStatus: boolean;
+  toggleErrorModal: () => void;
+  errorMessage: string;
+  successModalStatus: boolean;
+  toggleSuccessModal: () => void;
+  successMessage: string;
 }
 
 export interface BoardFormProps {
@@ -20,6 +26,12 @@ export interface BoardFormProps {
   validateFieldNames: Array<'contents' | 'writer' | 'password' | 'title'>;
   isEdit: boolean;
   board?: Board;
+  errorModalStatus: boolean;
+  toggleErrorModal: () => void;
+  errorMessage: string;
+  successModalStatus: boolean;
+  toggleSuccessModal: () => void;
+  successMessage: string;
 }
 
 export interface FormProps {

@@ -4,6 +4,7 @@ import type { BoardWriteProps } from './write.types';
 import type { Board } from '@/commons/types/types';
 import BoardForm from '../form/boardForm.container';
 import { type BoardInputType } from '../form/boardForm.types';
+import { useErrorModal, useSuccessModal } from '../commons/modal.hook';
 
 const validateFieldNames: Array<'writer' | 'password' | 'title' | 'contents'> = [
   'writer',
@@ -13,6 +14,10 @@ const validateFieldNames: Array<'writer' | 'password' | 'title' | 'contents'> = 
 ];
 
 export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
+  const { errorModalStatus, setErrorModalStatus, errorMessage, setErrorMessage, toggleErrorModal } = useErrorModal();
+  const { successMessage, setSuccessModalStatus, toggleSuccessModal, setSuccessMessage, successModalStatus } =
+    useSuccessModal();
+
   const [createBoardAPI] = useMutation<Record<'createBoard', Pick<Board, '_id'>>>(CREATE_BOARD);
 
   const onSubmit = async (data: BoardInputType) => {
@@ -35,10 +40,17 @@ export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
         throw new Error('게시글 생성 중 에러가 발생 했습니다!');
       }
 
-      alert('게시글 등록이 완료 되었습니다!');
-      routeBoardDetail(createdId);
+      setSuccessMessage('게시글 등록이 완료 되었습니다!');
+      setSuccessModalStatus(true);
+      setTimeout(() => {
+        setSuccessModalStatus(false);
+        routeBoardDetail(createdId);
+      }, 1000);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        setErrorModalStatus(true);
+      }
     }
   };
 
@@ -48,6 +60,12 @@ export default function BoardWrite({ routeBoardDetail }: BoardWriteProps) {
         onSubmitHandler: onSubmit,
         validateFieldNames,
         isEdit: false,
+        successMessage,
+        successModalStatus,
+        toggleSuccessModal,
+        errorMessage,
+        errorModalStatus,
+        toggleErrorModal,
       }}
     />
   );

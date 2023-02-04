@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { CREATE_COMMENT, FETCH_COMMENT } from '../comments.queries';
-import CommentWriteUI from './write.presenter';
+import CommentForm from '../form/form';
 import type { CommentCreateInput, CommentWriteProps } from './write.types';
 
 // const MAX_CONTENTS = 100;
@@ -47,8 +47,7 @@ export default function CommentWrite({ boardId }: CommentWriteProps) {
   });
 
   // TODO 이거 나중에 작업
-  const curContent = watch('contents');
-  console.log(curContent);
+  // const curContent = watch('contents');
 
-  return <CommentWriteUI {...{ register, onSubmit, errors }} />;
+  return <CommentForm {...{ register, onSubmit, errors }} />;
 }

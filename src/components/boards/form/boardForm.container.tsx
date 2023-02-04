@@ -5,7 +5,18 @@ import { useEditBoardForm, useWriteBoardForm } from './boardForm.hook';
 import BoardFormUI from './boardForm.presenter';
 import { type BoardFormProps } from './boardForm.types';
 
-export default function BoardForm({ onSubmitHandler, validateFieldNames, isEdit, board }: BoardFormProps) {
+export default function BoardForm({
+  onSubmitHandler,
+  validateFieldNames,
+  isEdit,
+  board,
+  errorMessage,
+  errorModalStatus,
+  toggleErrorModal,
+  successMessage,
+  successModalStatus,
+  toggleSuccessModal,
+}: BoardFormProps) {
   const [addressModalStatus, setAddressModalStatus] = useState(false);
   const { register, handleSubmit, watch, setValue, errors } = isEdit ? useEditBoardForm(board) : useWriteBoardForm();
 
@@ -21,8 +32,6 @@ export default function BoardForm({ onSubmitHandler, validateFieldNames, isEdit,
     toggleAddressModal();
   };
 
-//   console.log('board', board);
-
   return (
     <BoardFormUI
       {...{
@@ -35,6 +44,12 @@ export default function BoardForm({ onSubmitHandler, validateFieldNames, isEdit,
         isEdit,
         onAddressInput,
         board,
+        errorMessage,
+        errorModalStatus,
+        toggleErrorModal,
+        successMessage,
+        successModalStatus,
+        toggleSuccessModal,
       }}
     />
   );

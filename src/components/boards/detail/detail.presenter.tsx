@@ -1,6 +1,7 @@
 import { type BoardDetailUIProps } from './detail.type';
 import { Box, Divider } from '@mui/material';
 import { BoardBody, BoardHeader, Navigation } from './detail.style';
+import { ErrorModal } from '../commons/error.modal';
 
 export default function BoardDetailUI({
   board,
@@ -9,9 +10,14 @@ export default function BoardDetailUI({
   routeBoardEdit,
   likeBoard,
   dislikeBoard,
+  errorModalStatus,
+  toggleErrorModal,
+  errorMessage,
 }: BoardDetailUIProps) {
   return (
     <>
+      <ErrorModal {...{ errorModalStatus, toggleErrorModal, message: errorMessage }} />
+
       <Box
         sx={{
           width: '50vw',

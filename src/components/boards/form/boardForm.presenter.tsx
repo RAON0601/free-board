@@ -1,3 +1,12 @@
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import AddIcon from '@mui/icons-material/Add';
+import Modal from '@mui/material/Modal';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+
 import type { BoardFormUIProps } from './boardForm.types';
 import {
   Form,
@@ -7,14 +16,9 @@ import {
   SubmitButton,
   YellowTextField,
 } from './boardForm.style';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import AddIcon from '@mui/icons-material/Add';
-import Modal from '@mui/material/Modal';
-import DaumPostcodeEmbed from 'react-daum-postcode';
+
+import { ErrorModal } from '../commons/error.modal';
+import { SuccessModal } from '../commons/success.modal';
 
 export default function BoardFormUI({
   onSubmit,
@@ -26,10 +30,13 @@ export default function BoardFormUI({
   toggleAddressModal,
   addressModalStatus,
   onAddressInput,
+  errorMessage,
+  errorModalStatus,
+  toggleErrorModal,
+  successMessage,
+  successModalStatus,
+  toggleSuccessModal,
 }: BoardFormUIProps) {
-  console.log('board', board);
-  console.log(board?.writer);
-
   return (
     <Form onSubmit={onSubmit}>
       {addressModalStatus && (
@@ -39,6 +46,9 @@ export default function BoardFormUI({
           </ModalContentWrapper>
         </Modal>
       )}
+
+      <SuccessModal {...{ successModalStatus, toggleSuccessModal, message: successMessage }} />
+      <ErrorModal {...{ errorModalStatus, toggleErrorModal, message: errorMessage }} />
 
       <Typography variant="h3" gutterBottom fontWeight={700}>
         게시글 {isEdit ? '수정' : '등록'}

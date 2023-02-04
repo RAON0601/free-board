@@ -7,6 +7,9 @@ export interface BoardDetailUIProps {
   routeBoardEdit: (id: string) => void;
   likeBoard: () => void;
   dislikeBoard: () => void;
+  errorModalStatus: boolean;
+  toggleErrorModal: () => void;
+  errorMessage: string;
 }
 
 export interface BoardDetailProps {
