@@ -41,7 +41,7 @@ export const BoardHeader = ({ board }: BoardHeadProps) => {
   );
 };
 
-export const BoardBody = ({ board }: BoardBodyProps) => {
+export const BoardBody = ({ board, likeBoard, dislikeBoard }: BoardBodyProps) => {
   return (
     <Stack direction="column">
       <Typography variant="h2" fontSize={36} fontWeight={700} gutterBottom>
@@ -56,15 +56,15 @@ export const BoardBody = ({ board }: BoardBodyProps) => {
       {/* 동영상 있고 없고 처리는 나중에 하고 */}
 
       <Stack direction="row" justifyContent="center" sx={{ marginTop: '300px' }} spacing={4}>
-        <Stack direction="column" alignItems="center">
+        <Stack direction="column" alignItems="center" onClick={likeBoard}>
           <ThumbUpIcon sx={{ color: '#FFD600', cursor: 'pointer' }} />
 
-          <Typography variant="caption" fontSize={18} sx={{ color: '#bdbdbd' }}>
+          <Typography variant="caption" fontSize={18} sx={{ color: '#FFD600' }}>
             {board?.likeCount ?? 0}
           </Typography>
         </Stack>
 
-        <Stack direction="column" alignItems="center">
+        <Stack direction="column" alignItems="center" onClick={dislikeBoard}>
           <ThumbDownOffAltIcon sx={{ color: '#bdbdbd', cursor: 'pointer' }} />
 
           <Typography variant="caption" fontSize={18} sx={{ color: '#bdbdbd' }}>

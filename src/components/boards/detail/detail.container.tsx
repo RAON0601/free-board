@@ -1,17 +1,45 @@
 import BoardDetailUI from './detail.presenter';
 import { useMutation, useQuery } from '@apollo/client';
-import { DELETE_BOARD, FETCH_BOARD } from '../board.queries';
+import { DELETE_BOARD, DISLIKE_BOARD, FETCH_BOARD, LIKE_BOARD } from '../board.queries';
 import type { BoardDetailProps } from './detail.type';
 import type { Query, QueryFetchBoardArgs } from '@/commons/types/types';
 
 export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }: BoardDetailProps) {
   const [deleteBoardAPI] = useMutation(DELETE_BOARD);
+  const [likeBoardAPI] = useMutation(LIKE_BOARD);
+  const [dislikeBoardAPI] = useMutation(DISLIKE_BOARD);
 
   const { data } = useQuery<Pick<Query, 'fetchBoard'>, QueryFetchBoardArgs>(FETCH_BOARD, {
     variables: {
       boardId,
     },
   });
+
+  const dislikeBoard = async () => {
+    try {
+      void dislikeBoardAPI({
+        variables: {
+          boardId,
+        },
+        refetchQueries: [FETCH_BOARD],
+      });
+    } catch (e) {
+      alert('서버에 에러가 발생했습니다');
+    }
+  };
+
+  const likeBoard = async () => {
+    try {
+      void likeBoardAPI({
+        variables: {
+          boardId,
+        },
+        refetchQueries: [FETCH_BOARD],
+      });
+    } catch (e) {
+      alert('서버에 에러가 발생했습니다');
+    }
+  };
 
   const deleteBoard = async (id: string) => {
     try {
@@ -35,6 +63,8 @@ export default function BoardDetail({ boardId, routeBoardList, routeBoardEdit }:
         deleteBoard,
         routeBoardList,
         routeBoardEdit,
+        likeBoard,
+        dislikeBoard,
       }}
     />
   );

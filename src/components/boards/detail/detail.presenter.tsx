@@ -2,7 +2,14 @@ import { type BoardDetailUIProps } from './detail.type';
 import { Box, Divider } from '@mui/material';
 import { BoardBody, BoardHeader, Navigation } from './detail.style';
 
-export default function BoardDetailUI({ board, deleteBoard, routeBoardList, routeBoardEdit }: BoardDetailUIProps) {
+export default function BoardDetailUI({
+  board,
+  deleteBoard,
+  routeBoardList,
+  routeBoardEdit,
+  likeBoard,
+  dislikeBoard,
+}: BoardDetailUIProps) {
   return (
     <>
       <Box
@@ -21,7 +28,7 @@ export default function BoardDetailUI({ board, deleteBoard, routeBoardList, rout
 
         <Divider style={{ width: '100%', margin: '16px 0 36px 0' }} />
 
-        <BoardBody board={board} />
+        <BoardBody {...{ board, likeBoard, dislikeBoard }} />
       </Box>
 
       <Navigation {...{ board, deleteBoard, routeBoardList, routeBoardEdit }} />

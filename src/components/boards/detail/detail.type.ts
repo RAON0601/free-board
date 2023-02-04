@@ -5,6 +5,8 @@ export interface BoardDetailUIProps {
   deleteBoard: (id: string) => void;
   routeBoardList: () => void;
   routeBoardEdit: (id: string) => void;
+  likeBoard: () => void;
+  dislikeBoard: () => void;
 }
 
 export interface BoardDetailProps {
@@ -19,6 +21,8 @@ export interface BoardHeadProps {
 
 export interface BoardBodyProps {
   board?: Board;
+  likeBoard: () => void;
+  dislikeBoard: () => void;
 }
 
 export interface NavigationProps {
