@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person';
 import Stack from '@mui/material/Stack/Stack';
 import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
 
 import { formatYYYYMMDD } from '@/commons/utils';
 import type { CommentListUIProps } from './list.types';
@@ -21,14 +22,16 @@ export default function CommentListUI({ commentList }: CommentListUIProps) {
                 <PersonIcon fontSize="large" />
               </Avatar>
             </ListItemAvatar>
+
             <Typography variant="subtitle1" align="center">
               {comment.writer}
             </Typography>
+            <Rating name="read-only" value={comment.rating} readOnly />
           </Stack>
 
           <ListItemText
             primary={
-              <Typography variant="body1" sx={{ marginBottom: '12px' }}>
+              <Typography variant="body1" sx={{ marginBottom: '42px' }}>
                 {comment.contents}
               </Typography>
             }

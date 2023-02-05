@@ -1,20 +1,17 @@
 import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 import { type BaseSyntheticEvent } from 'react';
+import { type CreateBoardCommentInput } from '@/commons/types/types';
 
 export interface CommentWriteProps {
   boardId: string;
 }
 
-export interface CommentWriteUIProps {
-  register: UseFormRegister<CommentCreateInput>;
-  onSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
-  errors: FieldErrors<CommentCreateInput>;
-}
-
 export interface CommentFormProps {
-  register: UseFormRegister<CommentCreateInput>;
+  register: UseFormRegister<Partial<CreateBoardCommentInput>>;
   onSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
-  errors: FieldErrors<CommentCreateInput>;
+  errors: FieldErrors<Partial<CreateBoardCommentInput>>;
+  rating: number | null;
+  onRatingChange: (number: number | null) => void;
 }
 
 export interface CommentCreateInput {

@@ -4,17 +4,17 @@ import { Form } from './form.style';
 import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import { SubmitButton, YellowTextField } from '@/components/boards/form/boardForm.style';
 
-export default function CommentForm({ register, onSubmit, errors }: CommentFormProps) {
+export default function CommentForm({ register, onSubmit, errors, rating, onRatingChange }: CommentFormProps) {
   return (
     <Form onSubmit={onSubmit}>
       <Stack flexDirection="row" sx={{ margin: '20px 0' }}>
         <SpeakerNotesIcon sx={{ color: '#FFD600', marginRight: '8px' }} />
         <Typography variant="subtitle2" gutterBottom fontWeight={700}>
-          작성자
+          댓글
         </Typography>
       </Stack>
 
-      <Rating sx={{ marginBottom: '10px' }} />
+      <Rating sx={{ marginBottom: '10px' }} value={rating} onChange={(_, newValue) => onRatingChange(newValue)} />
 
       <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', marginBottom: '24px' }}>
         <YellowTextField
