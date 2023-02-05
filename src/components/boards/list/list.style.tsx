@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { type BoardTableProps } from './list.type';
+import { type BoardPaginationProps, type BoardTableProps } from './list.type';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { formatYYYYMMDD } from '@/commons/utils';
 import { Button, IconButton, InputBase, Stack } from '@mui/material';
 import { YellowTextField } from '../form/boardForm.style';
+import Pagination from '@mui/material/Pagination';
 
 export const BoardListContainer = styled.section`
   box-sizing: border-box;
@@ -105,5 +106,13 @@ export const BoardTable = ({ boardList, routingDetail }: BoardTableProps) => {
         </TableBody>
       </Table>
     </TableContainer>
+  );
+};
+
+export const BoardPagination = ({ curPage, onCurPageChange, boardCount }: BoardPaginationProps) => {
+  return (
+    <Stack sx={{ marginTop: '16px' }}>
+      <Pagination count={Math.ceil((boardCount ?? 10) / 10)} page={curPage} onChange={onCurPageChange} />
+    </Stack>
   );
 };
