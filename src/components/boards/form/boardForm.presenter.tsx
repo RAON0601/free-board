@@ -39,6 +39,7 @@ export default function BoardFormUI({
 }: BoardFormUIProps) {
   return (
     <Form onSubmit={onSubmit}>
+      {/* 모달 serverside ref 관련 수정 필요 */}
       {addressModalStatus && (
         <Modal open={true} onClose={toggleAddressModal}>
           <ModalContentWrapper>

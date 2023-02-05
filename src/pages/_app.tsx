@@ -8,6 +8,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { Layout } from '@/components/commons/layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
@@ -23,7 +24,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />;
+          <Layout>
+            <Component {...pageProps} />;
+          </Layout>
         </ThemeProvider>
       </ApolloProvider>
     </>
