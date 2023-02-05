@@ -11,6 +11,10 @@ export const theme = createTheme({
       contrastText: '#000000',
     },
   },
+
+  components: {
+    MuiAppBar: {},
+  },
 });
 
 /**
@@ -36,6 +40,12 @@ declare module '@mui/material/styles' {
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     black: true;
+    yellow: true;
+  }
+}
+
+declare module '@mui/material/AppBar' {
+  interface AppBarPropsColorOverrides {
     yellow: true;
   }
 }
