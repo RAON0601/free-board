@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CREATE_COMMENT, FETCH_COMMENT } from '../comments.queries';
-import CommentForm from '../form/form';
+import CommentForm from './form/form';
 import type { CommentWriteProps } from './write.types';
 
 export default function CommentWrite({ boardId }: CommentWriteProps) {

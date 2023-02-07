@@ -1,5 +1,5 @@
 import { Rating, Stack, Typography } from '@mui/material';
-import type { CommentFormProps } from '../write/write.types';
+import type { CommentFormProps } from '../write.types';
 import { Form } from './form.style';
 import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import { SubmitButton, YellowTextField } from '@/components/boards/form/boardForm.style';

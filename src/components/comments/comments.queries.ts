@@ -22,3 +22,15 @@ export const FETCH_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_COMMENT = gql`
+  mutation updateComment($contents: String, $rating: Float, $password: String, $commentId: ID!) {
+    updateBoardComment(
+      updateBoardCommentInput: { contents: $contents, rating: $rating }
+      boardCommentId: $commentId
+      password: $password
+    ) {
+      _id
+    }
+  }
+`;

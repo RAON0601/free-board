@@ -11,5 +11,7 @@ export default function CommentList({ boardId }: CommentListProps) {
     },
   });
 
-  return <CommentListUI {...{ commentList: data?.fetchBoardComments }} />;
+  
+
+  return <CommentListUI {...{ commentList: data?.fetchBoardComments, boardId }} />;
 }
