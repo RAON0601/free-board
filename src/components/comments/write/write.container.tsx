@@ -8,6 +8,7 @@ import type { CommentWriteProps } from './write.types';
 
 export default function CommentWrite({ boardId }: CommentWriteProps) {
   const [createCommentAPI] = useMutation(CREATE_COMMENT);
+
   const [rating, setRating] = useState<number | null>(0);
 
   const {

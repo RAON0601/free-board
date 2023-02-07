@@ -12,4 +12,6 @@ export interface CommentListProps {
 export interface CommentListUIProps {
   commentList?: Array<Partial<BoardComment>>;
   boardId: string;
+  onLoadMore: () => Promise<void>;
+  hasMore: boolean;
 }

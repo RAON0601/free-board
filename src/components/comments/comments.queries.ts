@@ -12,8 +12,8 @@ export const CREATE_COMMENT = gql`
 `;
 
 export const FETCH_COMMENT = gql`
-  query fetchComments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
+  query fetchComments($boardId: ID!, $page: Int) {
+    fetchBoardComments(boardId: $boardId, page: $page) {
       _id
       writer
       contents

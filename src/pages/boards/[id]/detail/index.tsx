@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import BoardDetail from '@/components/boards/detail/detail.container';
-import CommentWrite from '@/components/comments/write/write.container';
 import CommentList from '@/components/comments/list/list.container';
 
 export default function BoardDetailPage() {
@@ -17,7 +16,8 @@ export default function BoardDetailPage() {
 
   return (
     <>
-      <BoardDetail {...{ boardId, routeBoardList, routeBoardEdit }} /> <CommentWrite {...{ boardId }} />
+      <BoardDetail {...{ boardId, routeBoardList, routeBoardEdit }} />
+
       <CommentList {...{ boardId }} />
     </>
   );
