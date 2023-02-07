@@ -10,6 +10,7 @@ import { formatYYYYMMDD } from '@/commons/utils';
 import { type CommentItemUIProps } from './item.type';
 import { CommentEditForm } from '../../edit/form/form';
 import { CommentEditDialog } from '../../dialog/edit.dialog';
+import { CommentDeleteDialog } from '../../dialog/delete.dialog';
 
 export function CommentItemUI({
   isEdit,
@@ -22,6 +23,10 @@ export function CommentItemUI({
   handleClose,
   onSubmit,
   open,
+  deleteDialogOpen,
+  handleDeleteDialogClose,
+  handleDeleteDialogOpen,
+  boardId,
 }: CommentItemUIProps) {
   return (
     <>
@@ -56,7 +61,7 @@ export function CommentItemUI({
                   >
                     수정
                   </Typography>
-                  <Typography variant="body1" sx={{ cursor: 'pointer' }}>
+                  <Typography variant="body1" sx={{ cursor: 'pointer' }} onClick={handleDeleteDialogOpen}>
                     삭제
                   </Typography>
                 </Stack>
@@ -68,6 +73,7 @@ export function CommentItemUI({
       )}
 
       <CommentEditDialog {...{ open, handleClose, onSubmit, register }} />
+      <CommentDeleteDialog {...{ deleteDialogOpen, handleDeleteDialogClose, commentId: comment._id, boardId }} />
     </>
   );
 }

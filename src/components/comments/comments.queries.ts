@@ -34,3 +34,9 @@ export const UPDATE_COMMENT = gql`
     }
   }
 `;
+
+export const DELETE_COMMENT = gql`
+  mutation deleteComment($password: String, $commentId: ID!) {
+    deleteBoardComment(boardCommentId: $commentId, password: $password)
+  }
+`;

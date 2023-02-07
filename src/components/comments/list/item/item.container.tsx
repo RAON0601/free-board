@@ -10,6 +10,7 @@ export const CommentItem = ({ comment, boardId }: CommentItemProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [rating, setRating] = useState(comment.rating ?? null);
   const [open, setOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [updateCommentAPI] = useMutation(UPDATE_COMMENT);
 
   const { register, handleSubmit, reset } = useForm<Partial<CreateBoardCommentInput>>({
@@ -18,6 +19,9 @@ export const CommentItem = ({ comment, boardId }: CommentItemProps) => {
       password: '',
     },
   });
+
+  const handleDeleteDialogOpen = () => setDeleteDialogOpen(true);
+  const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,7 +65,22 @@ export const CommentItem = ({ comment, boardId }: CommentItemProps) => {
 
   return (
     <CommentItemUI
-      {...{ register, comment, isEdit, setIsEdit, rating, setRating, handleClickOpen, onSubmit, handleClose, open }}
+      {...{
+        register,
+        comment,
+        isEdit,
+        setIsEdit,
+        rating,
+        setRating,
+        handleClickOpen,
+        onSubmit,
+        handleClose,
+        open,
+        deleteDialogOpen,
+        handleDeleteDialogClose,
+        handleDeleteDialogOpen,
+        boardId,
+      }}
     />
   );
 };

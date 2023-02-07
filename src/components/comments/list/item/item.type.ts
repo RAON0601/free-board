@@ -6,6 +6,9 @@ export interface CommentItemUIProps {
   isEdit: boolean;
   rating: number | null;
   open: boolean;
+  deleteDialogOpen: boolean;
+  handleDeleteDialogOpen: () => void;
+  handleDeleteDialogClose: () => void;
   setRating: (data: number | null) => void;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
   comment: Partial<BoardComment>;
@@ -13,4 +16,5 @@ export interface CommentItemUIProps {
   handleClose: () => void;
   onSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
   register: UseFormRegister<Partial<CreateBoardCommentInput>>;
+  boardId: string;
 }
