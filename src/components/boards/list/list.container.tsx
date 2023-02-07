@@ -7,14 +7,21 @@ import { type BoardListProps } from './list.type';
 
 export default function BoardList({ routingDetail }: BoardListProps) {
   const [curPage, setCurPage] = useState(1);
+  const [search, setSearch] = useState('');
   const { data } = useQuery<Pick<Query, 'fetchBoards'> & Pick<Query, 'fetchBoardsCount'>>(FETCH_BOARDS, {
     variables: {
       page: curPage,
+      search,
     },
   });
 
   const onCurPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setCurPage(page);
+  };
+
+  const onSearch = (search: string) => {
+    setSearch(search);
+    setCurPage(1);
   };
 
   return (
@@ -25,6 +32,7 @@ export default function BoardList({ routingDetail }: BoardListProps) {
         curPage,
         onCurPageChange,
         routingDetail,
+        onSearch,
       }}
     />
   );

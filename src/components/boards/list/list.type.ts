@@ -10,6 +10,7 @@ export interface BoardListUIProps {
   curPage: number;
   onCurPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
   routingDetail: (id: string) => void;
+  onSearch: (search: string) => void;
 }
 
 export interface BoardTableProps {

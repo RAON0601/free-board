@@ -7,10 +7,11 @@ export default function BoardListUI({
   routingDetail,
   curPage,
   onCurPageChange,
+  onSearch,
 }: BoardListUIProps) {
   return (
     <BoardListContainer>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
 
       <BoardTable {...{ boardList, routingDetail }} />
 

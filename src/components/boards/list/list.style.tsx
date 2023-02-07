@@ -12,8 +12,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import { formatYYYYMMDD } from '@/commons/utils';
 import { Button, IconButton, InputBase, Stack } from '@mui/material';
-import { YellowTextField } from '../form/boardForm.style';
 import Pagination from '@mui/material/Pagination';
+import { useState } from 'react';
 
 export const BoardListContainer = styled.section`
   box-sizing: border-box;
@@ -28,7 +28,9 @@ export const BoardListContainer = styled.section`
   align-items: center;
 `;
 
-export const SearchBar = () => {
+export const SearchBar = ({ onSearch }: { onSearch: (search: string) => void }) => {
+  const [search, setSearch] = useState('');
+
   return (
     <Stack
       flexDirection="row"
@@ -48,12 +50,15 @@ export const SearchBar = () => {
         <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
           <SearchIcon />
         </IconButton>
-        <InputBase sx={{ ml: 1, flex: 1 }} placeholder="제목을 검색 해주세요" />
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="제목을 검색 해주세요"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
       </Paper>
 
-      <YellowTextField variant="outlined" placeholder="YYYY-MM-DD" sx={{ width: '250px', height: '40px' }} />
-
-      <Button color="black" variant="contained" sx={{ minWidth: '90px' }}>
+      <Button color="black" variant="contained" sx={{ minWidth: '90px' }} onClick={() => onSearch(search)}>
         검색하기
       </Button>
     </Stack>
