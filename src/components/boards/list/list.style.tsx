@@ -14,6 +14,7 @@ import { formatYYYYMMDD } from '@/commons/utils';
 import { Button, IconButton, InputBase, Stack } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export const BoardListContainer = styled.section`
   box-sizing: border-box;
@@ -115,9 +116,17 @@ export const BoardTable = ({ boardList, routingDetail }: BoardTableProps) => {
 };
 
 export const BoardPagination = ({ curPage, onCurPageChange, boardCount }: BoardPaginationProps) => {
+  const router = useRouter();
+  const onClick = () => {
+    void router.push('/boards/new');
+  };
+
   return (
-    <Stack sx={{ marginTop: '16px' }}>
+    <Stack direction="row" justifyContent="center" sx={{ marginTop: '16px', position: 'relative', width: '100%' }}>
       <Pagination count={Math.ceil((boardCount ?? 10) / 10)} page={curPage} onChange={onCurPageChange} />
+      <Button onClick={onClick} sx={{ position: 'absolute', right: '0' }} variant="contained" color="black">
+        글 작성하기
+      </Button>
     </Stack>
   );
 };

@@ -1,22 +1,10 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import AddIcon from '@mui/icons-material/Add';
 import Modal from '@mui/material/Modal';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 
 import type { BoardFormUIProps } from './boardForm.types';
-import {
-  Form,
-  ImageUploadButton,
-  ModalContentWrapper,
-  PostButton,
-  SubmitButton,
-  YellowTextField,
-} from './boardForm.style';
-
+import { Form, ModalContentWrapper, PostButton, SubmitButton, YellowTextField } from './boardForm.style';
 import { ErrorModal } from '../commons/error.modal';
 import { SuccessModal } from '../commons/success.modal';
 
@@ -39,7 +27,6 @@ export default function BoardFormUI({
 }: BoardFormUIProps) {
   return (
     <Form onSubmit={onSubmit}>
-      {/* 모달 serverside ref 관련 수정 필요 */}
       {addressModalStatus && (
         <Modal open={true} onClose={toggleAddressModal}>
           <ModalContentWrapper>
@@ -160,67 +147,7 @@ export default function BoardFormUI({
         </Stack>
       </Stack>
 
-      <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%', marginTop: '48px' }}>
-        <Typography variant="subtitle2" gutterBottom fontWeight={700}>
-          사진 첨부
-        </Typography>
-      </Stack>
-
-      <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%' }}>
-        <ImageUploadButton component="label">
-          <AddIcon />
-          <input hidden accept="image/*" type="file" />
-        </ImageUploadButton>
-
-        <ImageUploadButton component="label">
-          <AddIcon />
-          <input hidden accept="image/*" type="file" />
-        </ImageUploadButton>
-
-        <ImageUploadButton component="label">
-          <AddIcon />
-          <input hidden accept="image/*" type="file" />
-        </ImageUploadButton>
-      </Stack>
-
-      <Stack direction="row" justifyContent="flex-start" sx={{ width: '100%', marginTop: '48px' }}>
-        <Typography variant="subtitle2" gutterBottom fontWeight={700}>
-          메인 설정
-        </Typography>
-      </Stack>
-
-      <RadioGroup row name="category" sx={{ width: '100%' }}>
-        <FormControlLabel
-          value="유튜브"
-          label="유튜브"
-          control={
-            <Radio
-              sx={{
-                '&.Mui-checked': {
-                  color: '#FFD600',
-                },
-              }}
-            />
-          }
-          {...register('category')}
-        />
-        <FormControlLabel
-          value="사진"
-          label="사진"
-          control={
-            <Radio
-              sx={{
-                '&.Mui-checked': {
-                  color: '#FFD600',
-                },
-              }}
-            />
-          }
-          {...register('category')}
-        />
-      </RadioGroup>
-
-      <Stack direction="row">
+      <Stack direction="row" sx={{ marginTop: '24px' }}>
         <SubmitButton type="submit" color={validateInput() ? 'yellow' : 'black'} variant="contained">
           {isEdit ? '수정' : '등록'}하기
         </SubmitButton>

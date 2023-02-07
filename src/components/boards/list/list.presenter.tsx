@@ -14,7 +14,7 @@ export default function BoardListUI({
       <SearchBar onSearch={onSearch} />
 
       <BoardTable {...{ boardList, routingDetail }} />
-
+      
       <BoardPagination {...{ curPage, onCurPageChange, boardCount }} />
     </BoardListContainer>
   );
